@@ -19,6 +19,7 @@
         "allowSyntheticDefaultImports": true,
         // import의 구현이 require랑 비슷하게 가도록 함.
         "esModuleInterop": true,
+        "resolveJsonModule": true /* Allows for importing, extracting types from and generating json files */,
         // 파일 이름에서 대소문자 구별.
         "forceConsistentCasingInFileNames": true,
         // Decorator 허용. (MobX 때문에 사용.)

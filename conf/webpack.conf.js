@@ -4,29 +4,19 @@ const webpack = require('webpack');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const { EsbuildPlugin } = require('esbuild-loader');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const DotenvWebpack = require('dotenv-webpack');
-const { commonPaths, moduleNames } = require('./common');
+const { commonPaths } = require('./common');
 
-module.exports = (env, argv) => {
-    // 개발 모드 (--mode=development) / 배포 모드 (--mode=production).
+module.exports = () => {
     const isDevelopmentMode = true;
 
-    // ===============================================
-    // 프로젝트 관련 경로들.
-
-    const { rootPath, srcPath, outPath, modulePath } = commonPaths;
-
-    // ===============================================
-    // 코드 컴파일(변환) 정의.
+    const { rootPath, srcPath, outPath } = commonPaths;
 
     // sass / scss -> css.
     const sass2css = 'sass-loader';
 
     // css module -> css.
-    // https://velog.io/@kwonh/React-CSS를-작성하는-방법들-css-module-sass-css-in-js
     const cssModule2css = {
         loader: 'css-loader',
         options: {
@@ -44,9 +34,6 @@ module.exports = (env, argv) => {
     // css -> <style> tag.
     const css2inline = 'style-loader';
 
-    // css -> .css file.
-    const css2file = MiniCssExtractPlugin.loader;
-
     // svg -> React component.
     const svg2inline = '@svgr/webpack';
 
@@ -56,12 +43,6 @@ module.exports = (env, argv) => {
     const serverIP = '0.0.0.0';
     const localIP = '127.0.0.1';
     const serverPort = 8081;
-
-    // ===============================================
-    // Webpack alias 등 정의.
-
-    const urlTarget = process.env.URL_TARGET || 'local';
-    // const envPath = path.join(modulePath, 'superux-runtime', 'conf', `.env.${urlTarget}`);
 
     const plugins = [
         new CircularDependencyPlugin({
@@ -78,25 +59,6 @@ module.exports = (env, argv) => {
             template: path.join(srcPath, 'Template.html'),
             filename: path.join(outPath, 'index.html'),
         }),
-        // 리소스 등 필요 파일들 복사.
-        // new CopyPlugin({
-        //     patterns: [
-        //         { from: path.join(srcPath, 'common/resource/locales'), to: path.join(outPath, 'locales') },
-        //         { from: path.join(srcPath, 'common/resource/runtime'), to: path.join(outPath, 'runtime') },
-        //         {
-        //             from: path.join(srcPath, 'common/resource/import-libraries'),
-        //             to: path.join(outPath, 'import-libraries'),
-        //         },
-        //         {
-        //             from: path.join(srcPath, 'common/resource/studio-component'),
-        //             to: path.join(outPath, 'studio-component'),
-        //         },
-        //         {
-        //             from: path.join(srcPath, 'common/resource/favicon'),
-        //             to: path.join(outPath, 'favicon'),
-        //         },
-        //     ],
-        // }),
         new ForkTsCheckerWebpackPlugin({
             typescript: {
                 mode: 'write-references',
@@ -122,8 +84,6 @@ module.exports = (env, argv) => {
                   }),
               ],
           };
-    // ===============================================
-    // 최종 configuration.
 
     return {
         entry: path.join(srcPath, 'index.tsx'),
