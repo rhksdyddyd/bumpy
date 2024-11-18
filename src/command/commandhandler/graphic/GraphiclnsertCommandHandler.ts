@@ -11,7 +11,7 @@ export default class GraphicInsertCommandHandler extends CommandHandler {
      *
      * @param props command 를 수행하는 데 필요한 정보를 담고 있는 CommandProps
      * @param ctx 현재 app의 상태를 담고있는 AppContext
-     * @returns 정상적으로 수행을 마쳤을 경우 true / 아닐 경우 false
+     * @returns command 수행 결과에 따른 CommandHandlerResponse
      */
     public processCommand(props: CommandProps, ctx: AppContext): CommandHandlerResponse {
         switch (props.commandID) {

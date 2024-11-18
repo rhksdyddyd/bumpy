@@ -2,6 +2,7 @@ import MouseEvent from 'event/types/MouseEvent';
 import WheelEvent from 'event/types/WheelEvent';
 import KeyEvent from 'event/types/KeyEvent';
 import AppContext from 'store/context/AppContext';
+import Identifiable from 'util/common/Identifiable';
 
 /**
  * event 를 처리하는 event handler class 입니다.
@@ -89,4 +90,4 @@ class EventHandler {
     }
 }
 
-export default EventHandler;
+export default class extends Identifiable(EventHandler) {}

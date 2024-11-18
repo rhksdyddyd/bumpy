@@ -1,6 +1,7 @@
 import { boundMethod } from 'autobind-decorator';
 import CommandEnum from 'command/CommandEnum';
-import CommandHandlerFactory, { CommandHandlerEnum } from 'command/commandhandler/factory/CommandHandlerFactory';
+import CommandHandlerFactory from 'command/commandhandler/factory/CommandHandlerFactory';
+import GraphicInsertCommandHandler from 'command/commandhandler/graphic/GraphiclnsertCommandHandler';
 import CommandMapper, { CommandCreatorMapType, CommandMapType } from 'command/CommandMapper/CommandMapper';
 
 /**
@@ -56,10 +57,9 @@ class EditModeCommandMapper extends CommandMapper {
     @boundMethod
     private init(commandHandlerFactory: CommandHandlerFactory): void {
         this.getCommandCreatorMap().set(CommandEnum.GRAPHIC_INSERT_SET_UP, () => {
-            const graphicModelInsertCommandHandler = commandHandlerFactory.getTargetCommandHandler(
-                CommandHandlerEnum.GRAPHIC_INSERT
-            );
-            this.getCommandMap().set(CommandEnum.GRAPHIC_INSERT_SET_UP, [graphicModelInsertCommandHandler]);
+            const graphicInsertCommandHandler =
+                commandHandlerFactory.getTargetCommandHandler(GraphicInsertCommandHandler);
+            this.getCommandMap().set(CommandEnum.GRAPHIC_INSERT_SET_UP, [graphicInsertCommandHandler]);
         });
     }
 }

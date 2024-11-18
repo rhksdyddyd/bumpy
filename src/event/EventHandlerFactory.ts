@@ -1,10 +1,11 @@
 import { boundMethod } from 'autobind-decorator';
 import EventHandler from 'event/handler/EventHandler';
+import { identify, UniqueKey } from 'util/common/Identifiable';
 
 /**
  * EventHandler의 instance를 관리하는 Map type 입니다.
  */
-export type EventHandlerMap = Map<number, EventHandler>;
+export type EventHandlerMap = Map<UniqueKey, EventHandler>;
 
 /**
  * EventHandler를 생성하여 반환하는 factory입니다.
@@ -33,7 +34,13 @@ export default class EventHandlerFactory {
      */
     @boundMethod
     public getTargetEventHandler(EventHandlerConstructor: new () => EventHandler): EventHandler {
-        // need implement
-        return new EventHandler();
+        const uniqueKey = identify(EventHandlerConstructor);
+        let eventHandler = this.eventHandlerMap.get(uniqueKey);
+        if (eventHandler === undefined) {
+            eventHandler = new EventHandlerConstructor();
+            this.eventHandlerMap.set(uniqueKey, eventHandler);
+        }
+
+        return eventHandler;
     }
 }

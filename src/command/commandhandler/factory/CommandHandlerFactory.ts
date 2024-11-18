@@ -1,37 +1,16 @@
 import { boundMethod } from 'autobind-decorator';
 import CommandHandler from 'command/commandhandler/CommandHandler';
-import GraphicInsertCommandHandler from 'command/commandhandler/graphic/GraphiclnsertCommandHandler';
-
-/**
- * command handler의 생성자를 관리하는 map type 입니다.
- */
-type CommandHandlerConstructorMaptype = Map<CommandHandlerEnum, new () => CommandHandler>;
+import { identify, UniqueKey } from 'util/common/Identifiable';
 
 /**
  * command handler의 instance를 관리하는 map type 입니다.
  */
-export type CommandHandlerMapType = Map<CommandHandlerEnum, CommandHandler>;
-
-/**
- * command handler의 종류를 나타내는 enum 입니다.
- */
-export enum CommandHandlerEnum {
-    GRAPHIC_INSERT,
-    GRAPHIC_MOVE,
-    GRAPHIC_RESIZE,
-    GRAPHIC_DELETE,
-    GROUP,
-}
+export type CommandHandlerMapType = Map<UniqueKey, CommandHandler>;
 
 /**
  * Command handler 를 생성하는 factory 입니다.
  */
 export default class CommandHandlerFactory {
-    /**
-     * command handler의 생성자를 관리하는 map 입니다.
-     */
-    private readonly commandHandlerConstructorMap: CommandHandlerConstructorMaptype;
-
     /**
      * command handler의 instance를 관리하는 map 입니다.
      */
@@ -41,21 +20,7 @@ export default class CommandHandlerFactory {
      * 생성자
      */
     public constructor() {
-        this.commandHandlerConstructorMap = new Map();
         this.commandHandlerMap = new Map();
-        this.init();
-    }
-
-    /**
-     * commandHandlerConstructorMap을 구성합니다.
-     */
-    @boundMethod
-    private init() {
-        this.commandHandlerConstructorMap.set(CommandHandlerEnum.GRAPHIC_INSERT, GraphicInsertCommandHandler);
-        // this.commandHandlerConstructorMap.push(CommandHandlerEnum.GRAPHIC_DELETE, GraphicDeleteCommandHandler);
-        // this.commandHandlerConstructorMap.push(CommandHandlerEnum.GRAPHIC_MOVE, GraphicMoveCommandHandler);
-        // this.commandHandlerConstructorMap.push(CommandHandlerEnum.GRAPHIC_RESIZE, GraphicResizeCommandHandler);
-        // this.commandHandlerConstructorMap.push(CommandHandlerEnum.GRAPHIC_GROUP, GraphicGroupCommandHandler);
     }
 
     /**
@@ -65,16 +30,12 @@ export default class CommandHandlerFactory {
      * @returns 요청한 command handler의 instance
      */
     @boundMethod
-    public getTargetCommandHandler(commandHandlerEnum: CommandHandlerEnum): CommandHandler {
-        let commandHandler = this.commandHandlerMap.get(commandHandlerEnum);
-
+    public getTargetCommandHandler(CommandHandlerConstructor: new () => CommandHandler): CommandHandler {
+        const uniqueKey = identify(CommandHandlerConstructor);
+        let commandHandler = this.commandHandlerMap.get(uniqueKey);
         if (commandHandler === undefined) {
-            const constructor = this.commandHandlerConstructorMap.get(commandHandlerEnum);
-            if (constructor === undefined) {
-                throw Error();
-            }
-            commandHandler = new constructor();
-            this.commandHandlerMap.set(commandHandlerEnum, commandHandler);
+            commandHandler = new CommandHandlerConstructor();
+            this.commandHandlerMap.set(uniqueKey, commandHandler);
         }
 
         return commandHandler;
