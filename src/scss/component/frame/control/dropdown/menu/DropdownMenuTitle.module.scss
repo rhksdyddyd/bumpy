@@ -1,0 +1,29 @@
+@use 'scss/common/common_size';
+@use 'scss/common/common_color';
+@use 'scss/common/common_font';
+@use 'sass:color';
+
+.container {
+  @extend %ribbon_dropdown_title_left;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  line-height: 12px;
+  padding: common_size.$ribbon_dropdown_basic_margin 0;
+
+  .content {
+    align-items: center;
+    display: flex;
+    margin: 0 common_size.$ribbon_dropdown_basic_margin;
+
+    &::after {
+      border-color: color.adjust(common_color.$default_black, $alpha: -0.9);
+      border-style: solid;
+      border-width: 1px;
+      content: '';
+      flex: 1;
+      height: 0;
+      margin-left: common_size.$ribbon_dropdown_basic_margin;
+    }
+  }
+}

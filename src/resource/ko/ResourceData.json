@@ -1,0 +1,10 @@
+{
+  "TXT_GROUP_INSERT_SHAPE": "도형 삽입",
+  "TXT_SHAPE_INSERT_GALLERY_RECT": "사각형",
+  "TIP_INSERT_SHAPE_RECT": "사각형",
+  "TIP_INSERT_SHAPE_DIAGONAL_RECT": "대각선으로 놓인 사각형",
+  "IMG_INSERT_SHAPE_RECT": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><g fill=\"none\" fill-rule=\"evenodd\"><path fill=\"#4C4E53\" d=\"M0 1h16v14H0z\"/><path fill=\"#FFF\" d=\"M1 2h14v12H1z\"/></g></svg>",
+  "IMG_INSERT_SHAPE_DIAGONAL_RECT": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><g fill=\"none\" fill-rule=\"evenodd\"><path fill=\"#4C4E53\" d=\"M0 1h8v7H0z\"/><path fill=\"#FFF\" d=\"M1 2h6v5H1z\"/><path fill=\"#4C4E53\" d=\"M8 7h8v7H8z\"/><path fill=\"#FFF\" d=\"M9 8h6v5H9z\"/></g></svg>",
+  "IMG_RIBBON_GALLERY_MORE_BUTTON": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"9\"><path fill=\"#4C4E53\" fill-rule=\"evenodd\" d=\"M3.5 7 1 4h5zM1 2h5v1H1z\"/></svg>",
+  "IMG_ARROW_DOWN": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\"><path fill=\"#4C4E53\" fill-rule=\"evenodd\" d=\"M8 4 5 8 2 4z\"/></svg>"
+}

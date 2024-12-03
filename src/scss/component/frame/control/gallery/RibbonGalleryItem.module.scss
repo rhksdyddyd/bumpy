@@ -1,0 +1,6 @@
+@use 'scss/common/common_size';
+
+.gallery_item {
+  height: common_size.$ribbon_gallery_item_height;
+  width: common_size.$ribbon_gallery_item_width;
+}

@@ -1,0 +1,76 @@
+@use 'scss/common/common_color';
+@use 'scss/common/common_size';
+@use 'scss/variables';
+
+.container {
+  display: flex;
+  height: common_size.$ribbon_gallery_height_01;
+
+  &.ga1 {
+    width: common_size.$ribbon_gallery_width_01;
+  }
+
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+.content {
+  align-content: flex-start;
+  border-color: common_color.$ribbon_border_gray;
+  border-style: solid;
+  border-width: 1px 0 1px 1px;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  overflow: hidden;
+
+  &.rg1 {
+    gap: 1px;
+    padding: 1px;
+  }  
+}
+
+.arrow-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  align-items: center;
+  background-color: common_color.$ribbon_background_white;
+  border-color: common_color.$ribbon_border_gray;
+  border-style: solid;
+  border-width: 1px;
+  display: flex;
+  height: common_size.$ribbon_comp_width;
+  justify-content: center;
+  width: common_size.$ribbon_button_arrow_width;
+
+  &.down {
+    border-top-width: 0;
+
+    &:hover {
+      border-top-width: 1px;
+    }
+  }
+
+  &.more {
+    border-top-width: 0;
+
+    &:hover {
+      border-top-width: 1px;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(variables.$app_color, 0.1);
+    border-color: rgb(variables.$app_border_color);
+  }
+
+  &:active {
+    background-color: rgba(variables.$app_color, 0.5);
+    border-color: rgb(variables.$app_color);
+  }
+}

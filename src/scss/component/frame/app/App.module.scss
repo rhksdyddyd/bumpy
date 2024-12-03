@@ -1,0 +1,66 @@
+@use 'scss/common/common_color';
+@use 'scss/helper';
+
+/*
+ * 주의!
+ * fonts는 한 번만 import 할 것
+ */
+@import 'scss/common/fonts';
+
+.container {
+  --app_color: #{helper.hex-to-rgb-string(common_color.$default_app_color)};
+  --app_border_color: #{helper.hex-to-rgb-string(common_color.$default_app_border_color)};
+  --app_hovered_color: #{helper.hex-to-rgb-string(common_color.$default_app_hovered_color)};
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  outline: 0;
+  overflow: auto;
+  user-select: none;
+  white-space: pre-wrap;
+
+  div {
+    &:focus {
+      outline: none;
+    }
+  }
+
+  div, textarea {
+    &::-webkit-scrollbar {
+      width: 16px;
+      height: 16px;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(95, 99, 104, 0.4);
+      background-clip: padding-box;
+      border: 4px solid transparent;
+      border-radius: 8px;
+      min-height: 30px;
+
+      &:hover, &:active {
+        cursor: default;
+        background: #5F6368;
+        background-clip: padding-box;
+      }
+    }
+  }
+
+  input,
+  button,
+  textarea {
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  }
+
+  button {
+    background-color: transparent;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+  }
+}
+

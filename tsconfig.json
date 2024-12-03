@@ -1,46 +1,32 @@
 {
-    "compilerOptions": {
-        // 코드에서 사용할 모듈 시스템.
-        // (import ... from ... 사용, dynamic import (import()) 가능)
-        "module": "esnext",
-        // TypeScript를 어떤 버전의 JavaScript로 변환할 것인지.
-        "target": "es2020",
-        // Source map 생성.
-        "sourceMap": true,
-        // 권장되는 문법 체크들 on.
-        "strict": true,
-        // .tsx에서 태그를 어떤 js 코드로 변환할 것인지 설정.
-        // ex. <div/> -> React.createElement('div', ...)로 변환.
-        "jsx": "react",
-        // 모듈 처리 방법.
-        "moduleResolution": "node",
-        // Default import시에 *를 안 써도 되게 해줌.
-        // ex. import * as React from 'react'; 뿐만 아니라 import React from 'react';도 허용.
-        "allowSyntheticDefaultImports": true,
-        // import의 구현이 require랑 비슷하게 가도록 함.
-        "esModuleInterop": true,
-        "resolveJsonModule": true /* Allows for importing, extracting types from and generating json files */,
-        // 파일 이름에서 대소문자 구별.
-        "forceConsistentCasingInFileNames": true,
-        // Decorator 허용. (MobX 때문에 사용.)
-        "experimentalDecorators": true,
-        // Override할 경우 반드시 override 키워드를 써야 함.
-        "noImplicitOverride": true,
-        // Class field 구현에 Object.defineProperty() 사용. (MobX 때문에 사용.)
-        "useDefineForClassFields": true,
-        // import 처리 시의 기준 경로.
-        "baseUrl": ".",
-        // import 처리 시의 alias.
-        "paths": {
-            // Relative import (import '../../../component/ABC') 대신 absolute import (import 'ux/component/ABC') 가능케 함.
-            "*": ["src/*"]
-        },
-        // DOM API 등의 type 정의들 사용.
-        "lib": ["DOM", "ES2020"],
-        "incremental": true,
-        "outDir": "dist",
-        "skipDefaultLibCheck": true,
-        "noEmit": true
-    },
-    "exclude": ["node_modules"]
+  /* Visit https://aka.ms/tsconfig.json to read more about this file */
+  "compilerOptions": {
+    "module": "esnext", /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+    "target": "es2020", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */
+    "sourceMap": true, /* Generates corresponding '.map' file. */
+    "strict": true, /* Type-Checking Options */
+    "jsx": "react", /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
+    "moduleResolution": "node", /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "allowSyntheticDefaultImports": true, /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
+    "esModuleInterop": true, /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    "resolveJsonModule": true, /* Allows for importing, extracting types from and generating json files */
+    "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
+    "experimentalDecorators": true, /* Enables experimental support for ES7 decorators. */
+    "noImplicitOverride": true, /* Ensure overriding members in derived classes are marked with an override modifier. */
+    "baseUrl": "./src", /* Base directory to resolve non-absolute module names. */
+    // import 처리 시의 alias.
+    // "paths": {
+    //   // Relative import 대신 absolute import를 사용할 수 있도록 함.
+    //   "*": [
+    //     "src/*"
+    //   ]
+    // }, /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+    "incremental": true, /* Enable incremental compilation */
+    "outDir": "dist", /* Redirect output structure to the directory. */
+    "skipDefaultLibCheck": true, /* Skip type checking .d.ts files that are included with TypeScript. */
+    "noEmit": true /* Do not emit outputs. */
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

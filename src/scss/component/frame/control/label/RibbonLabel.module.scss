@@ -1,0 +1,37 @@
+@use 'scss/common/common_size';
+@use 'scss/variables';
+
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  &.gi1 {
+    border: common_size.$default_border_width solid transparent;
+    box-sizing: border-box;
+    height: common_size.$ribbon_comp_height;
+    width: common_size.$ribbon_comp_width;
+
+    &:hover {
+      background-color: rgba(variables.$app-color, 0.2);
+    }
+
+    &:active {
+      background-color: rgba(variables.$app-color, 0.5);
+    }
+
+    &.selected {
+      background-color: rgba(variables.$app-color, 0.5);
+
+      &:hover {
+        background-color: rgba(variables.$app-color, 0.2);
+        border-color: rgba(variables.$app-color, 0.5);
+      }
+    }
+  }
+}

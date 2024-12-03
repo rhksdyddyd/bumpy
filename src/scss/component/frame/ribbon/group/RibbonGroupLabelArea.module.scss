@@ -1,0 +1,11 @@
+@use 'scss/common/common_size';
+@use 'scss/common/common_font';
+
+.container {
+  @extend %ribbon_group_center;
+  align-items: center;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  margin: auto common_size.$ribbon_group_label_area_margin common_size.$ribbon_group_label_area_margin;
+}

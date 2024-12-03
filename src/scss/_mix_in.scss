@@ -1,0 +1,17 @@
+@use 'scss/common/common_color';
+@use 'scss/common/common_font';
+
+@mixin menu_base {
+  @extend %default_main_left;
+  background-color: common_color.$ribbon_dropdown_background_white;
+  border: 1px solid common_color.$ribbon_dropdown_border_gray;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 4px 2px;
+  left: 0;
+  margin: 0;
+  outline: transparent;
+  overflow-y: auto;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  z-index: 10002;
+}

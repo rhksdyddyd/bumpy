@@ -1,0 +1,30 @@
+@use 'scss/common/common_color';
+
+// default
+%default_main_left {
+  color: common_color.$default_dark;
+  font-size: 12px;
+  text-align: left;
+}
+
+// ribbon group
+%ribbon_group_center {
+    font-size: 12px;
+    text-align: center;
+}
+
+// ribbon
+%ribbon_comp_disable_center {
+  color: common_color.$ribbon_black;
+  font-size: 12px;
+  opacity: 0.3;
+  text-align: center;
+}
+
+// ribbon dropdown
+%ribbon_dropdown_title_left {
+  color: common_color.$default_dark;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
+}

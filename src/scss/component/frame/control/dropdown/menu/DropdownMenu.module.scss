@@ -1,0 +1,11 @@
+@use 'scss/common/common_size';
+@use 'scss/mix_in';
+
+.container {
+  @include mix_in.menu_base;
+
+  &.shape_insert_gallery {
+    height: common_size.$ribbon_dropdown_shape_insert_height;
+    width: common_size.$ribbon_dropdown_shape_insert_width;
+  }
+}

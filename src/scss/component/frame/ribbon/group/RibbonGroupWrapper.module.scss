@@ -1,0 +1,7 @@
+@use 'scss/common/common_color';
+
+.container {
+  border-bottom: 1px solid common_color.$default_border_gray;
+  display: flex;
+  overflow: auto hidden;
+}

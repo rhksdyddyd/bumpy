@@ -1,0 +1,13 @@
+@use 'scss/common/common_color';
+@use 'scss/common/common_size';
+
+.line {
+  display: flex;
+  flex: 1;
+  height: common_size.$ribbon_dropdown_separator_height;
+  justify-content: center;
+
+  &.full {
+    background-color: common_color.$ribbon_dropdown_separator_gray;
+  }
+}

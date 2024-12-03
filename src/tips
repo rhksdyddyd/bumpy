@@ -1,0 +1,8 @@
+margin 적용 순서
+
+margin: [margin-top] [margin-right] [margin-bottom] [margin-left]; 상우하좌
+margin: [margin-top] [margin-left = margin-right] [margin-bottom]; 상 좌-우 하
+margin: [margin-top=margin-bottom] [margin-left = margin-right]; 상-하 좌-우
+margin: [margin-top = margin-bottom = margin-left = margin-right]; 상-하-좌-우
+
+

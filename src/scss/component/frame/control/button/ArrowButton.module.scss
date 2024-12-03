@@ -1,0 +1,33 @@
+@use 'scss/common/common_size';
+@use 'scss/common/common_font';
+
+.container {
+  border-width: 1px;
+  height: common_size.$button_height;
+  width: common_size.$button_arrow_width;
+
+  &.up {
+    padding-left: 1px;
+
+    >svg {
+      transform: rotateX(180deg);
+    }
+  }
+
+  &.down {
+    padding-left: 1px;
+  }
+
+  &.more {
+    border-top-width: 0;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    
+    svg {
+      @extend %ribbon_comp_disable_center;
+      opacity: 0.3;
+    }
+  }
+}
