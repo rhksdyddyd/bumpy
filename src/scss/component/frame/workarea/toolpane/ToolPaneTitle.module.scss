@@ -1,0 +1,31 @@
+@use 'scss/common/common_font';
+@use 'scss/variables';
+
+.title {
+  align-items: center;
+  border-bottom: 1px solid #D5D5D5;
+  box-sizing: border-box;
+  display: flex;
+  height: 48px;
+  padding: 0 24px 0 30px;
+  flex-shrink: 0;
+}
+
+.label {
+  @extend %toolpane_title_left;
+  flex-shrink: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.closeIcon {
+  display: flex;
+  margin-left: auto; 
+  border: 0;
+
+  &:hover {
+    path {
+      fill: rgb(variables.$app_color);
+    }
+  }
+}

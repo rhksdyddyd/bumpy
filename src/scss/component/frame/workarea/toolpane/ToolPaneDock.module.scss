@@ -1,0 +1,14 @@
+.container {
+  background: #f6f7fb;
+  border-left: 1px solid #d5d5d5;
+  width: 40px;
+  flex-shrink: 0;
+
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 8px;
+  z-index: 4;
+}

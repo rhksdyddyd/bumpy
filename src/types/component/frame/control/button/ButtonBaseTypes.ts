@@ -8,6 +8,7 @@ export interface IButtonBaseProps {
   className?: string;
   disabled?: boolean;
   tabIndex?: number;
+  selected?: boolean;
   id?: string;
   onClick?(e: React.MouseEvent): void;
   onDoubleClick?(e: React.MouseEvent): void;

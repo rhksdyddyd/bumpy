@@ -1,0 +1,62 @@
+@use 'scss/common/common_color';
+
+.container {
+  &.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  &.column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.child {
+  display: flex;
+
+  &.second {
+    flex: 1;
+  }
+
+  &.row {
+    height: 100%;
+    min-width: 10px;
+  }
+  
+  &.column {
+    min-height: 10px;
+    width: 100%;
+  }
+}
+
+.divider_view {
+  background-color: #d5d5d5;
+  display: flex;
+
+  &.row {
+    height: 100%;
+    width: 1px;
+  }
+
+  &.column {
+    height: 1px;
+    width: 100%;
+  }
+}
+
+.divider_controller {
+  position: absolute;
+
+  &.row {
+    width: 10px;
+    cursor: ew-resize;
+  }
+
+  &.column {
+    height: 10px;
+    cursor: ns-resize;
+  }
+}

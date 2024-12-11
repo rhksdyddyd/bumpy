@@ -8,7 +8,7 @@ import styles from 'scss/component/frame/ribbon/group/RibbonGroupWrapper.module.
 /**
  * RibbonComponent 바로 아래의 Component 입니다, 여러개의 RibbonGroup을 render 합니다.
  */
-const RibbonGroupWrapperComponent: React.FC = () => {
+const RibbonGroupWrapperComponent = (): React.JSX.Element => {
   return (
     <div className={styles.container}>
       {RibbonData.map((controlInfo: IControlInfo) => {

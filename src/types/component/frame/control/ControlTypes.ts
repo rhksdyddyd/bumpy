@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React from 'react';
 import { ControlTypeEnum } from 'types/component/frame/control/ControlTypeEnum';
 import { ReactKeyEnum } from 'types/resource/ReactKeyEnum';
 import { ResourceEnum } from 'types/resource/ResourceEnum';
@@ -23,7 +23,7 @@ export type ControlType = (controlProps: IControlProps) => React.JSX.Element;
 export interface IControlProps {
   attr: IControlAttr;
   eventhandler?: IControlEvent;
-  children?: ReactNode[];
+  children?: React.ReactNode[];
   subControlInfos?: Array<IControlInfo>;
 }
 
@@ -33,7 +33,7 @@ export interface IControlProps {
 export interface ICustomControlProps<T extends IControlAttr, S extends IControlEvent> {
   attr?: T;
   eventhandler?: S;
-  children?: ReactNode[];
+  children?: React.ReactNode[];
   subControlInfos?: Array<IControlInfo>;
 }
 

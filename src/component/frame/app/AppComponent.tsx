@@ -8,7 +8,7 @@ import MainPageComponent from '../mainpage/MainPageComponent';
  */
 const AppComponent = (): React.JSX.Element => {
   return (
-    <div className={classNames(styles.container)}>
+    <div id="app_root" className={classNames(styles.container)}>
       <MainPageComponent />
     </div>
   );

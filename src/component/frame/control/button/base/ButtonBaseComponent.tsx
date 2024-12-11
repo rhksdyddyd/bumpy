@@ -9,13 +9,18 @@ import { IButtonBaseProps } from 'types/component/frame/control/button/ButtonBas
 const ButtonBaseComponent = React.forwardRef<
   HTMLButtonElement,
   PropsWithChildren<IButtonBaseProps>
->(({ children, ...props }: PropsWithChildren<IButtonBaseProps>, ref): React.JSX.Element => {
-  return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <button type="button" ref={ref} {...props}>
-      {children}
-    </button>
-  );
-});
+>(
+  (
+    { children, selected, ...props }: PropsWithChildren<IButtonBaseProps>,
+    ref
+  ): React.JSX.Element => {
+    return (
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      <button type="button" aria-pressed={selected} ref={ref} {...props}>
+        {children}
+      </button>
+    );
+  }
+);
 
 export default ButtonBaseComponent;

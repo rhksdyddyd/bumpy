@@ -1,0 +1,28 @@
+@keyframes slide {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 297px;
+  }
+}
+
+.toolPane {
+  background-color: #fff;
+  border-left: 1px solid #D5D5D5;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 20px;
+  width: 297px;
+}
+
+.open {
+  animation: slide 0.4s ease-in-out 1 normal forwards;
+}
+
+.close {
+  animation: slide 0.4s ease-in-out 1 reverse forwards;
+}

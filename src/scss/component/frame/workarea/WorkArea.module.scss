@@ -3,7 +3,7 @@
 @use 'scss/helper';
 
 .container {
-  border: var(--app_border_color);
+  border: common_color.$default_border_gray;
   border-style: solid;
   border-width: common_size.$default_border_width;
   display: flex;

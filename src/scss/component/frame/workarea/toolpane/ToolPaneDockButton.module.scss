@@ -1,0 +1,31 @@
+
+.button {
+  align-items: center;
+  border-radius: 6px;
+  display: flex;
+  flex-shrink: 0;
+  height: 30px;
+  justify-content: center;
+  position: relative;
+  width: 30px;
+
+  path {
+    fill: rgba(95, 99, 104, 1);
+  }
+
+  &:hover {
+    background: #e8eaed;
+  }
+
+  &[aria-pressed=true] {
+    background: #d5e6ff;
+  }
+
+  &[disabled] {
+    background: none;
+    
+    path {
+      fill: rgba(142, 149, 157, 1)
+    }
+  }
+}

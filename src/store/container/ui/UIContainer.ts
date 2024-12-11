@@ -1,5 +1,6 @@
 import { boundMethod } from 'autobind-decorator';
 import ControlHandlerContainer from 'store/container/ui/controlhandler/ControlHandlerContainer';
+import ToolPaneContainer from './toolpane/ToolPaneContainer';
 
 /**
  * ui 관련 정보를 담는 container 입니다.
@@ -11,11 +12,14 @@ export default class UIContainer {
    */
   private controlHandlerContainer: ControlHandlerContainer;
 
+  private toolPaneContainer: ToolPaneContainer;
+
   /**
    * 생성자
    */
   public constructor() {
     this.controlHandlerContainer = new ControlHandlerContainer();
+    this.toolPaneContainer = new ToolPaneContainer();
   }
 
   /**
@@ -26,5 +30,10 @@ export default class UIContainer {
   @boundMethod
   public getControlHandlerContainer(): ControlHandlerContainer {
     return this.controlHandlerContainer;
+  }
+
+  @boundMethod
+  public getToolPaneContainer(): ToolPaneContainer {
+    return this.toolPaneContainer;
   }
 }
