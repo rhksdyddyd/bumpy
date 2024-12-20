@@ -1,6 +1,5 @@
 import AppContext from 'store/context/AppContext';
-import { ICommandProps } from 'types/store/BasicTypes';
-import { ICommandHandlerResponse } from 'types/store/command/CommandTypes';
+import { ICommandHandlerResponse, ICommandProps } from 'types/store/command/CommandTypes';
 import Identifiable from 'util/id/Identifiable';
 
 /**

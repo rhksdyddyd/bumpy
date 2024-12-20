@@ -1,4 +1,4 @@
-import { ICommandProps } from '../BasicTypes';
+import { ICommandProps } from '../command/CommandTypes';
 
 /**
  * ReadOnlyContext를 초기화하기 위해 사용하는 interface 입니다.

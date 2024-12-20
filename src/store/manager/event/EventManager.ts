@@ -113,4 +113,32 @@ export default class EventManager {
       .get(ctx.getEditableContext().getEventState())
       ?.some(handler => handler.onKeyUp(event, ctx));
   }
+
+  @boundMethod
+  public onAppAreaMouseDown(event: MouseEvent, ctx: AppContext): void {
+    this.eventMap
+      .get(ctx.getEditableContext().getEventState())
+      ?.some(handler => handler.onAppAreaMouseDown(event, ctx));
+  }
+
+  @boundMethod
+  public onAppAreaMouseUp(event: MouseEvent, ctx: AppContext): void {
+    this.eventMap
+      .get(ctx.getEditableContext().getEventState())
+      ?.some(handler => handler.onAppAreaMouseUp(event, ctx));
+  }
+
+  @boundMethod
+  public onAppAreaMouseMove(event: MouseEvent, ctx: AppContext): void {
+    this.eventMap
+      .get(ctx.getEditableContext().getEventState())
+      ?.some(handler => handler.onAppAreaMouseMove(event, ctx));
+  }
+
+  @boundMethod
+  public onAppAreaDrag(event: MouseEvent, ctx: AppContext): void {
+    this.eventMap
+      .get(ctx.getEditableContext().getEventState())
+      ?.some(handler => handler.onAppAreaDrag(event, ctx));
+  }
 }

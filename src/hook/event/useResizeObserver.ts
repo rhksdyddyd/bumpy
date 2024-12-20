@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 interface UseResizeObserverProps<T extends HTMLElement> {
-  targetRef: React.RefObject<T>;
-  callback: () => void;
+  targetRef: Nullable<React.RefObject<T>>;
+  callback: (entries: ResizeObserverEntry) => void;
 }
 
 const useResizeObserver = <T extends HTMLElement>({
@@ -12,13 +12,17 @@ const useResizeObserver = <T extends HTMLElement>({
   const observerRef = useRef<ResizeObserver>();
 
   useEffect(() => {
-    observerRef.current = new ResizeObserver(([entry]) => {
-      if (entry.target === targetRef.current) {
-        callback();
-      }
+    observerRef.current = new ResizeObserver(entries => {
+      entries.some(entry => {
+        if (targetRef !== undefined && entry.target === targetRef.current) {
+          callback(entry);
+          return true;
+        }
+        return false;
+      });
     });
 
-    if (targetRef.current) {
+    if (targetRef !== undefined && targetRef.current) {
       observerRef.current.observe(targetRef.current);
     }
 

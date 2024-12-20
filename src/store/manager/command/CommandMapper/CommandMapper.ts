@@ -1,16 +1,7 @@
 import { boundMethod } from 'autobind-decorator';
 import CommandHandler from 'store/manager/command/commandhandler/CommandHandler';
 import { CommandEnum } from 'types/store/command/CommandEnum';
-
-/**
- * 특정 command에 대한 필요한 command handler 묶음을 관리하는 map type 입니다.
- */
-export type CommandMapType = Map<CommandEnum, CommandHandler[]>;
-
-/**
- * CommandHandlerMap을 동적으로 구성하기 위한 함수를 담고 있는 map type입니다.
- */
-export type CommandCreatorMapType = Map<CommandEnum, () => void>;
+import { CommandCreatorMapType, CommandMapType } from 'types/store/command/CommandTypes';
 
 /**
  * CommandMapper는 commandId 에 따라 어떤 CommandHandler 들이 동작하는지를 정의합니다.

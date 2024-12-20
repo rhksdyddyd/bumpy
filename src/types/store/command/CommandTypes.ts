@@ -1,5 +1,19 @@
 import CommandMapper from 'store/manager/command/CommandMapper/CommandMapper';
 import { CommandModeEnum } from 'types/store/command/CommandModeEnum';
+import SelectionContainer from 'store/manager/selection/SelectionContainer';
+import CommandHandler from 'store/manager/command/commandhandler/CommandHandler';
+import { CommandEnum } from './CommandEnum';
+import { EventStateEnum } from '../event/EventStateEnum';
+
+/**
+ * 특정 command에 대한 필요한 command handler 묶음을 관리하는 map type 입니다.
+ */
+export type CommandMapType = Map<CommandEnum, CommandHandler[]>;
+
+/**
+ * CommandHandlerMap을 동적으로 구성하기 위한 함수를 담고 있는 map type입니다.
+ */
+export type CommandCreatorMapType = Map<CommandEnum, () => void>;
 
 /**
  * CommandMapper를 관리하기 위한 map type 입니다.
@@ -20,4 +34,14 @@ export interface ICommandHandlerResponse {
    * 종결되었을 경우 true, 다음 commandHandler에서 처리해야 할 것이 있을 경우 false
    */
   terminate: boolean;
+}
+
+/**
+ * CommandManager 에 command 를 execute 할 때 지켜야 할 interface 입니다.
+ * CommandHandler 는 CommandProps 를 인자로 받아 작업을 처리합니다.
+ */
+export interface ICommandProps {
+  commandId: CommandEnum;
+  newEventState?: EventStateEnum;
+  newSelectionContainer?: SelectionContainer;
 }

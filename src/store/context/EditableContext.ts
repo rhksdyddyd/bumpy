@@ -1,12 +1,14 @@
 import { boundMethod } from 'autobind-decorator';
 import SlideModel from 'model/node/slide/SlideModel';
 import TreeNode from 'model/node/TreeNode';
+import ProxyLayerInfoContainer from 'store/container/proxylayer/ProxyLayerInfoContainer';
 import UIContainer from 'store/container/ui/UIContainer';
+import ViewModeContainer from 'store/container/viewmode/ViewModeContainer';
 import CommandController from 'store/manager/command/CommandController';
 import UndoStack from 'store/manager/command/UndoStack';
 import SelectionContainer from 'store/manager/selection/SelectionContainer';
-import { ICommandProps } from 'types/store/BasicTypes';
 import { CommandModeEnum } from 'types/store/command/CommandModeEnum';
+import { ICommandProps } from 'types/store/command/CommandTypes';
 import { IEditableContextInitProp } from 'types/store/context/AppContextTypes';
 import { EventStateEnum } from 'types/store/event/EventStateEnum';
 import IdGenerator from 'util/id/IdGenerator';
@@ -67,6 +69,9 @@ export default class EditableContext {
    */
   private readonly uiContainer: UIContainer;
 
+  private readonly proxyLayerInfoContainer: ProxyLayerInfoContainer;
+
+  private readonly viewModeContainer: ViewModeContainer;
   /*
    * 단축키 관련 정보를 보관합니다.
    */
@@ -102,6 +107,8 @@ export default class EditableContext {
     this.commandController = undefined;
     this.selectionContainer = this.createSelectionContainer();
     this.uiContainer = new UIContainer();
+    this.proxyLayerInfoContainer = new ProxyLayerInfoContainer();
+    this.viewModeContainer = new ViewModeContainer();
     // this.shortCutContainer = new ShortCutContainer();
     // this.propContainer = new PropContainer();
     // this.graphicEditInfoContainer = new GraphicEditInfoContainer();
@@ -268,6 +275,16 @@ export default class EditableContext {
   @boundMethod
   public getUIContainer(): UIContainer {
     return this.uiContainer;
+  }
+
+  @boundMethod
+  public getProxyLayerInfoContainer(): ProxyLayerInfoContainer {
+    return this.proxyLayerInfoContainer;
+  }
+
+  @boundMethod
+  public getViewModeContainer(): ViewModeContainer {
+    return this.viewModeContainer;
   }
 
   // @boundMethod

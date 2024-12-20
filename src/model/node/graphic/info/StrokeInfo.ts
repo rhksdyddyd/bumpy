@@ -1,6 +1,6 @@
 import { boundMethod } from 'autobind-decorator';
 import FillBase from 'model/node/graphic/info/fill/FillBase';
-import { FillTypeEnum } from 'types/component/node/graphic/FillTypeEnum';
+import { FillTypeEnum } from 'types/model/node/graphic/FillTypeEnum';
 
 /**
  * 도형의 윤곽선 정보를 담고있는 class입니다.

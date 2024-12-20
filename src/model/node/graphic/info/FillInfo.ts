@@ -1,6 +1,6 @@
 import { boundMethod } from 'autobind-decorator';
 import FillBase from 'model/node/graphic/info/fill/FillBase';
-import { FillTypeEnum } from 'types/component/node/graphic/FillTypeEnum';
+import { FillTypeEnum } from 'types/model/node/graphic/FillTypeEnum';
 
 /**
  * 도형의 채우기 정보를 관리하는 class 입니다.

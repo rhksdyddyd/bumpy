@@ -3,6 +3,7 @@
 @use 'scss/helper';
 
 .container {
+  background: #f6f7fb;
   border: common_color.$default_border_gray;
   border-style: solid;
   border-width: common_size.$default_border_width;

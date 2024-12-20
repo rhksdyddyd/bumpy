@@ -1,5 +1,5 @@
 import FillBase from 'model/node/graphic/info/fill/FillBase';
-import { FillTypeEnum } from 'types/component/node/graphic/FillTypeEnum';
+import { FillTypeEnum } from 'types/model/node/graphic/FillTypeEnum';
 
 /**
  * '채우기 없음' 상태의 정보를 나타내는 class 입니다.

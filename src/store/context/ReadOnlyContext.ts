@@ -1,5 +1,5 @@
 import { boundMethod } from 'autobind-decorator';
-import { ICommandProps } from 'types/store/BasicTypes';
+import { ICommandProps } from 'types/store/command/CommandTypes';
 import { IReadOnlyContextInitProp } from 'types/store/context/AppContextTypes';
 
 /**

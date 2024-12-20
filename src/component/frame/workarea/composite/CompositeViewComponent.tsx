@@ -16,7 +16,7 @@ const CompositeViewComponent = ({
   const dividerViewRef = useRef<HTMLDivElement>(null);
   const dividerControllerRef = useRef<HTMLDivElement>(null);
 
-  const { handleMouseDownCapture } = useCompositeViewDivider({
+  const { firstChildCssStyle, handleMouseDownCapture } = useCompositeViewDivider({
     compositeViewRef,
     firstChildRef,
     dividerViewRef,
@@ -33,6 +33,7 @@ const CompositeViewComponent = ({
       <div
         className={classNames({ [styles.child]: true }, { [styles[flexDirection]]: true })}
         ref={firstChildRef}
+        style={firstChildCssStyle}
       >
         {firstChild}
       </div>

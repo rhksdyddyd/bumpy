@@ -49,6 +49,7 @@ module.exports = {
         devDependencies: true,
       },
     ],
+    'react/jsx-props-no-spreading': 'off',
     'react/jsx-one-expression-per-line': 0,
     'react/state-in-constructor': 0,
     'react-hooks/exhaustive-deps': 0,

@@ -6,7 +6,8 @@ import KeyEvent from 'store/manager/event/wrapper/KeyEvent';
 import MouseEvent from 'store/manager/event/wrapper/MouseEvent';
 import WheelEvent from 'store/manager/event/wrapper/WheelEvent';
 import SelectionManager from 'store/manager/selection/SelectionManager';
-import { ICommandProps, IManagerExcutionOptions } from 'types/store/BasicTypes';
+import { IManagerExcutionOptions } from 'types/store/AppStoreTypes';
+import { ICommandProps } from 'types/store/command/CommandTypes';
 
 /**
  * App의 상태를 관리하는 class 입니다.
@@ -179,5 +180,25 @@ export default class AppStore {
   @boundMethod
   public handleKeyUp(event: KeyEvent): void {
     this.executeAllManagers({ event, eventType: 'onKeyUp' });
+  }
+
+  @boundMethod
+  public handleAppAreaMouseDown(event: MouseEvent): void {
+    this.executeAllManagers({ event, eventType: 'onAppAreaMouseDown' });
+  }
+
+  @boundMethod
+  public handleAppAreaMouseUp(event: MouseEvent): void {
+    this.executeAllManagers({ event, eventType: 'onAppAreaMouseUp' });
+  }
+
+  @boundMethod
+  public handleAppAreaMouseMove(event: MouseEvent): void {
+    this.executeAllManagers({ event, eventType: 'onAppAreaMouseMove' });
+  }
+
+  @boundMethod
+  public handleAppAreaDrag(event: MouseEvent): void {
+    this.executeAllManagers({ event, eventType: 'onAppAreaDrag' });
   }
 }

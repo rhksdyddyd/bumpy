@@ -1,4 +1,4 @@
-import { FillTypeEnum } from 'types/component/node/graphic/FillTypeEnum';
+import { FillTypeEnum } from 'types/model/node/graphic/FillTypeEnum';
 
 /**
  * 도형의 채우기 정보를 담고있는 class 입니다.

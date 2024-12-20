@@ -1,11 +1,12 @@
 import { boundMethod } from 'autobind-decorator';
 import AppContext from 'store/context/AppContext';
 import { TreeNodeTypeEnum } from 'types/model/node/TreeNodeTypeEnum';
+import Identifiable from 'util/id/Identifiable';
 
 /**
  * Tree 와 관련된 로직이 구현된 abstract class입니다.
  */
-export default abstract class TreeNode {
+abstract class TreeNode {
   /**
    * TreeNode 의 고유 ID 입니다.
    */
@@ -37,6 +38,8 @@ export default abstract class TreeNode {
    */
   private prevSibling?: TreeNode;
 
+  private rerenderChildrenRef: Nullable<React.MutableRefObject<number>>;
+
   /**
    * rerender를 요청하는 함수입니다.
    */
@@ -54,6 +57,7 @@ export default abstract class TreeNode {
     this.lastChild = undefined;
     this.nextSibling = undefined;
     this.prevSibling = undefined;
+    this.rerenderChildrenRef = undefined;
     this.rerenderTrigger = undefined;
   }
 
@@ -177,6 +181,20 @@ export default abstract class TreeNode {
     this.prevSibling = prevSibling;
   }
 
+  @boundMethod
+  public setRerenderChildrenRef(
+    rerenderChildrenRef: Nullable<React.MutableRefObject<number>>
+  ): void {
+    this.rerenderChildrenRef = rerenderChildrenRef;
+  }
+
+  @boundMethod
+  public checkRerenderChildren(): void {
+    if (this.rerenderChildrenRef !== undefined) {
+      this.rerenderChildrenRef.current += 1;
+    }
+  }
+
   /**
    * rerenderTrigger 함수를 설정합니다.
    * component에서 설정합니다
@@ -184,7 +202,7 @@ export default abstract class TreeNode {
    * @param rerenderTrigger rerender를 발생시키는 함수
    */
   @boundMethod
-  public setRerenderTrigger(rerenderTrigger: () => void): void {
+  public setRerenderTrigger(rerenderTrigger: Nullable<() => void>): void {
     this.rerenderTrigger = rerenderTrigger;
   }
 
@@ -339,3 +357,5 @@ export default abstract class TreeNode {
    */
   public abstract getTreeNodeType(): TreeNodeTypeEnum;
 }
+
+export default abstract class extends Identifiable(TreeNode) {}

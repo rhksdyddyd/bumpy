@@ -88,6 +88,22 @@ class EventHandler {
   public onKeyUp(event: KeyEvent, ctx: AppContext): boolean {
     return false;
   }
+
+  public onAppAreaMouseDown(event: MouseEvent, ctx: AppContext): boolean {
+    return false;
+  }
+
+  public onAppAreaMouseUp(event: MouseEvent, ctx: AppContext): boolean {
+    return false;
+  }
+
+  public onAppAreaMouseMove(event: MouseEvent, ctx: AppContext): boolean {
+    return false;
+  }
+
+  public onAppAreaDrag(event: MouseEvent, ctx: AppContext): boolean {
+    return false;
+  }
 }
 
 export default class extends Identifiable(EventHandler) {}

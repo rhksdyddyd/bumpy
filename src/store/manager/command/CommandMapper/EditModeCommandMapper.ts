@@ -1,11 +1,9 @@
 import { boundMethod } from 'autobind-decorator';
 import CommandHandlerFactory from 'store/manager/command/commandhandler/factory/CommandHandlerFactory';
 import GraphicInsertCommandHandler from 'store/manager/command/commandhandler/graphic/GraphiclnsertCommandHandler';
-import CommandMapper, {
-  CommandCreatorMapType,
-  CommandMapType,
-} from 'store/manager/command/CommandMapper/CommandMapper';
+import CommandMapper from 'store/manager/command/CommandMapper/CommandMapper';
 import { CommandEnum } from 'types/store/command/CommandEnum';
+import { CommandCreatorMapType, CommandMapType } from 'types/store/command/CommandTypes';
 
 /**
  * 편집 모드 (Edit) 인 경우에 대한 command mapper 입니다.

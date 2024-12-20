@@ -1,7 +1,6 @@
 import AppContext from 'store/context/AppContext';
 import CommandHandler from 'store/manager/command/commandhandler/CommandHandler';
-import { ICommandProps } from 'types/store/BasicTypes';
-import { ICommandHandlerResponse } from 'types/store/command/CommandTypes';
+import { ICommandHandlerResponse, ICommandProps } from 'types/store/command/CommandTypes';
 
 /**
  * graphic model을 삽입하는 동작을 수행하는 command handler입니다.

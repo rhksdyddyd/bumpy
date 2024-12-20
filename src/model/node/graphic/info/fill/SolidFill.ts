@@ -1,6 +1,6 @@
 import Color from 'model/color/Color';
 import FillBase from 'model/node/graphic/info/fill/FillBase';
-import { FillTypeEnum } from 'types/component/node/graphic/FillTypeEnum';
+import { FillTypeEnum } from 'types/model/node/graphic/FillTypeEnum';
 
 /**
  * 단일 색으로 채우는 경우에 대한 class 입니다.

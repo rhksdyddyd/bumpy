@@ -1,5 +1,8 @@
 import TreeNode from 'model/node/TreeNode';
+import { ISize } from 'types/common/geometry/GeometryTypes';
 import { TreeNodeTypeEnum } from 'types/model/node/TreeNodeTypeEnum';
+import { boundMethod } from 'autobind-decorator';
+import FillInfo from '../graphic/info/FillInfo';
 
 export default class SlideModel extends TreeNode {
   /**
@@ -12,6 +15,10 @@ export default class SlideModel extends TreeNode {
    */
   private height: number;
 
+  private fillInfo: Nullable<FillInfo>;
+
+  private calculateContentsSizeRef: Nullable<React.MutableRefObject<number>>;
+
   /**
    * 생성자
    *
@@ -19,8 +26,39 @@ export default class SlideModel extends TreeNode {
    */
   constructor(id: number) {
     super(id);
-    this.width = 800;
-    this.height = 500;
+    this.width = 1300;
+    this.height = 700;
+    this.fillInfo = undefined;
+    this.calculateContentsSizeRef = undefined;
+  }
+
+  /**
+   * 크기를 반환합니다.
+   *
+   * @returns SlideModel의 너비와 높이 정보
+   */
+  @boundMethod
+  public getSize(): ISize {
+    return { width: this.width, height: this.height };
+  }
+
+  @boundMethod
+  public getFillInfo(): Nullable<FillInfo> {
+    return this.fillInfo;
+  }
+
+  @boundMethod
+  public setCalculateContentsSizeRef(
+    calculateContentsSizeRef: Nullable<React.MutableRefObject<number>>
+  ): void {
+    this.calculateContentsSizeRef = calculateContentsSizeRef;
+  }
+
+  @boundMethod
+  public checkCalculateContentsSizeRef(): void {
+    if (this.calculateContentsSizeRef !== undefined) {
+      this.calculateContentsSizeRef.current += 1;
+    }
   }
 
   /**
@@ -30,14 +68,5 @@ export default class SlideModel extends TreeNode {
    */
   public getTreeNodeType(): TreeNodeTypeEnum {
     return TreeNodeTypeEnum.SLIDE;
-  }
-
-  /**
-   * 크기를 반환합니다.
-   *
-   * @returns SlideModel의 너비와 높이 정보
-   */
-  public getSize(): { width: number; height: number } {
-    return { width: this.width, height: this.height };
   }
 }

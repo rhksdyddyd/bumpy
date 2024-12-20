@@ -1,5 +1,7 @@
 import useResizeObserver from 'hook/event/useResizeObserver';
+import useAppStore from 'hook/store/useAppStore';
 import { useLayoutEffect, useRef } from 'react';
+import { CursorType, ICursorInfo } from 'types/common/cursor/CursorTypes';
 
 interface UseCompositeViewDividerProps {
   compositeViewRef: React.RefObject<HTMLDivElement>;
@@ -18,6 +20,7 @@ type HOOK = ({
   ratio,
   flexDirection,
 }: UseCompositeViewDividerProps) => {
+  firstChildCssStyle: React.CSSProperties;
   handleMouseDownCapture: (e: React.MouseEvent<Element>) => void;
 };
 
@@ -29,9 +32,18 @@ const useCompositeViewDivider: HOOK = ({
   ratio,
   flexDirection,
 }: UseCompositeViewDividerProps) => {
+  const appStore = useAppStore();
+  const proxyLayerInfoContainer = appStore
+    .getAppContext()
+    .getEditableContext()
+    .getProxyLayerInfoContainer();
+
   const mouseCoordinateRef = useRef<number>(0);
   const initialSizeRef = useRef<number>(0);
   const compositeViewSizeRef = useRef<number>(0);
+
+  const firstChildCssStyle =
+    flexDirection === 'row' ? { width: `${ratio}%` } : { height: `${ratio}%` };
 
   const setRatio =
     flexDirection === 'row'
@@ -53,33 +65,27 @@ const useCompositeViewDivider: HOOK = ({
       ? () => {
           if (dividerViewRef.current !== null && dividerControllerRef.current !== null) {
             const dividerControllerDivElement = dividerControllerRef.current;
+            const dividerControllerWidth = 10 / window.devicePixelRatio;
             const dividerViewRect = dividerViewRef.current.getBoundingClientRect();
 
-            const dividerControllerWidth = 10 / window.devicePixelRatio;
-            dividerControllerDivElement.style.width = `${dividerControllerWidth}px`;
-            dividerControllerDivElement.style.left = `${
+            const dividerControllerStyle = `left:${
               dividerViewRect.left - (dividerControllerWidth - dividerViewRect.width) / 2
-            }px`;
-            dividerControllerDivElement.style.height = `${dividerViewRect.height}px`;
+            }px; width:${dividerControllerWidth}px; height:${dividerViewRect.height}px;`;
+            dividerControllerDivElement.style.cssText = dividerControllerStyle;
           }
         }
       : () => {
           if (dividerViewRef.current !== null && dividerControllerRef.current !== null) {
             const dividerControllerDivElement = dividerControllerRef.current;
+            const dividerControllerHeight = 10 / window.devicePixelRatio;
             const dividerViewRect = dividerViewRef.current.getBoundingClientRect();
 
-            const dividerControllerHeight = 10 / window.devicePixelRatio;
-            dividerControllerDivElement.style.height = `${dividerControllerHeight}px`;
-            dividerControllerDivElement.style.top = `${
+            const dividerControllerStyle = `top:${
               dividerViewRect.top - (dividerControllerHeight - dividerViewRect.height) / 2
-            }px`;
-            dividerControllerDivElement.style.width = `${dividerViewRect.width}px`;
+            }px; width:${dividerViewRect.width}px; height:${dividerControllerHeight}px;`;
+            dividerControllerDivElement.style.cssText = dividerControllerStyle;
           }
         };
-
-  useLayoutEffect(() => {
-    setRatio(ratio);
-  }, []);
 
   useResizeObserver({ targetRef: firstChildRef, callback: updateDivider });
 
@@ -137,6 +143,11 @@ const useCompositeViewDivider: HOOK = ({
           compositeViewSizeRef.current = getCompositeViewSize();
         };
 
+  const cursorInfo: ICursorInfo =
+    flexDirection === 'row'
+      ? { cursorType: CursorType.ew_resize }
+      : { cursorType: CursorType.ns_resize };
+
   const handleMouseMoveCapture = (e: MouseEvent): void => {
     const currentMouseCoordinate = getMouseCoordinate(e);
     const newSize = Math.max(
@@ -150,6 +161,7 @@ const useCompositeViewDivider: HOOK = ({
   };
 
   function handleMouseDownCapture(e: React.MouseEvent<Element>): void {
+    proxyLayerInfoContainer.enableAppAreaProxyLayer(undefined, cursorInfo, false, false);
     mouseCoordinateRef.current = getMouseCoordinate(e);
     setMouseCoordinate(e);
     setInitialSize();
@@ -162,13 +174,14 @@ const useCompositeViewDivider: HOOK = ({
   }
 
   function handleMouseUpCapture(e: MouseEvent): void {
+    proxyLayerInfoContainer.disableAppAreaProxyLayer();
     window.removeEventListener('mousemove', handleMouseMoveCapture, true);
     window.removeEventListener('mouseup', handleMouseUpCapture, true);
     e.preventDefault();
     e.stopImmediatePropagation();
   }
 
-  return { handleMouseDownCapture };
+  return { firstChildCssStyle, handleMouseDownCapture };
 };
 
 export default useCompositeViewDivider;

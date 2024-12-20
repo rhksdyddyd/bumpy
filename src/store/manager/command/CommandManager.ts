@@ -4,8 +4,8 @@ import CommandCompositor from 'store/manager/command/CommandCompositor';
 import CommandController from 'store/manager/command/CommandController';
 import CommandMapper from 'store/manager/command/CommandMapper/CommandMapper';
 import CommandModeMapper from 'store/manager/command/CommandModeMapper';
-import { ICommandProps } from 'types/store/BasicTypes';
 import { CommandEnum } from 'types/store/command/CommandEnum';
+import { ICommandProps } from 'types/store/command/CommandTypes';
 
 /**
  * Command 수행을 담당하는 class 입니다.
