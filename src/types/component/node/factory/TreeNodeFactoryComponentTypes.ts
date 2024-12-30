@@ -4,6 +4,7 @@ import { UniqueKey } from 'util/id/Identifiable';
 export interface TreeNodeComponentProps {
   model: TreeNode;
   zoomRatio: number;
+  isEditPreviewLayer: boolean;
 }
 
 export type CreateTreeNodeComponentFunctionType = (

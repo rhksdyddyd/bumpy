@@ -95,11 +95,11 @@ export default class AppStore {
       }
     }
 
-    if (this.commandManager.execute(this.ctx) === false) {
-      return;
+    if (this.commandManager.execute(this.ctx) === true) {
+      this.selectionManager.updateSelection(this.ctx);
     }
 
-    this.selectionManager.updateSelection(this.ctx);
+    this.getAppContext().getEditableContext().flushRerenderTriggerList();
   }
 
   /**

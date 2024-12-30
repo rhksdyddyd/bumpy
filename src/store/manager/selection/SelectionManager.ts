@@ -22,12 +22,13 @@ export default class SelectionManager {
 
     if (commandProps !== undefined) {
       const { newEventState, newSelectionContainer } = commandProps;
-      if (newEventState !== undefined && newSelectionContainer !== undefined) {
+      if (newEventState !== undefined) {
         editableContext.setEventState(newEventState);
-        editableContext.setSelectionContainer(newSelectionContainer);
-      } else {
-        throw Error();
       }
+      if (newSelectionContainer !== undefined) {
+        editableContext.setSelectionContainer(newSelectionContainer);
+      }
+      editableContext.getGraphicEditInfoContainer().requestRerenderSelectionLayer(ctx);
     } else {
       throw Error();
     }

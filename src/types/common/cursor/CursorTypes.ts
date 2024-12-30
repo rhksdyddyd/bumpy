@@ -1,5 +1,5 @@
 import { ResourceEnum } from 'types/resource/ResourceEnum';
-import { IPositon } from '../geometry/GeometryTypes';
+import { IPoint } from '../geometry/GeometryTypes';
 
 export const CursorType = {
   auto: 'auto',
@@ -46,5 +46,8 @@ export interface ICursorInfo {
   className?: string;
   img?: ResourceEnum;
   fallbackCursor?: CursorType;
-  position?: IPositon;
+  position?: IPoint;
 }
+
+export const CLASSNAME_GRAPHIC_CURSOR_MOVE_HOVER = 'graphic_cursor_move_hover';
+export const CLASSNAME_GRAPHIC_CURSOR_ROTATE_HOVER = 'graphic_cursor_rotate_hover';

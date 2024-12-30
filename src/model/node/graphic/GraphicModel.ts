@@ -40,7 +40,7 @@ export default class GraphicModel extends TreeNode {
   /**
    * object의 현재 편집 상태를 나타내는 값입니다.
    */
-  private beingEdited: boolean;
+  private isBeingEdited: boolean;
 
   /**
    * object 가 현재 선택되어 있는지 나타내는 값입니다.
@@ -59,7 +59,7 @@ export default class GraphicModel extends TreeNode {
     this.pathInfo = undefined;
     this.fillInfo = undefined;
     this.strokeInfo = undefined;
-    this.beingEdited = false;
+    this.isBeingEdited = false;
     this.selected = false;
   }
 
@@ -216,8 +216,8 @@ export default class GraphicModel extends TreeNode {
    * @param beingEdited 현재 도형의 편집 상태
    */
   @boundMethod
-  public setBeingEdited(beingEdited: boolean): void {
-    this.beingEdited = beingEdited;
+  public setIsBeingEdited(isBeingEdited: boolean): void {
+    this.isBeingEdited = isBeingEdited;
   }
 
   /**
@@ -226,8 +226,8 @@ export default class GraphicModel extends TreeNode {
    * @returns 현재 도형의 편집 상태
    */
   @boundMethod
-  public isBeingEdited(): boolean {
-    return this.beingEdited;
+  public getIsBeingEdited(): boolean {
+    return this.isBeingEdited;
   }
 
   /**

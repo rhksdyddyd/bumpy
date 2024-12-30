@@ -64,6 +64,11 @@ export default class GraphicModelSelectionContainer extends InternalSelectionCon
    */
   @boundMethod
   public getSelectedModels(): TreeNode[] {
+    return this.getSelectedGraphicModels();
+  }
+
+  @boundMethod
+  public getSelectedGraphicModels(): GraphicModel[] {
     return this.graphicModelSelections.map(graphicModelSelection => {
       return graphicModelSelection.getModel();
     });

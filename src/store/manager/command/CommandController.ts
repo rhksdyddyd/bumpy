@@ -193,13 +193,13 @@ export default class CommandController {
       const editableContext = ctx.getEditableContext();
       editableContext.getUndoStack().push(this.commandCompositor);
       const commandProps = editableContext.getCommandProps();
-      if (
-        commandProps !== undefined &&
-        commandProps.newEventState !== undefined &&
-        commandProps.newSelectionContainer !== undefined
-      ) {
-        this.commandCompositor.setNewEventState(commandProps.newEventState);
-        this.commandCompositor.setNewSelectionContainer(commandProps.newSelectionContainer);
+      if (commandProps !== undefined) {
+        if (commandProps.newEventState !== undefined) {
+          this.commandCompositor.setNewEventState(commandProps.newEventState);
+        }
+        if (commandProps.newSelectionContainer !== undefined) {
+          this.commandCompositor.setNewSelectionContainer(commandProps.newSelectionContainer);
+        }
       } else {
         throw Error;
       }

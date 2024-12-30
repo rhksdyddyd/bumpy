@@ -27,7 +27,11 @@ const EditViewComponent = (): React.JSX.Element => {
     <div className={classNames(styles.container)}>
       <div id={EditViewSizeTrackerId} className={classNames(styles.size_tracker)} />
       <div ref={ref} className={classNames(styles.contents)}>
-        <TreeNodeFactoryComponent model={treeNodeRoot} zoomRatio={zoomRatio} />
+        <TreeNodeFactoryComponent
+          model={treeNodeRoot}
+          zoomRatio={zoomRatio}
+          isEditPreviewLayer={false}
+        />
       </div>
     </div>
   );

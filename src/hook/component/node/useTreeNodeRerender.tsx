@@ -7,13 +7,17 @@ type Hook = (props: TreeNodeComponentProps) => void;
 const useTreeNodeRerender: Hook = (props: TreeNodeComponentProps) => {
   const { triggerRerender } = useRerender();
 
-  const { model } = props;
+  const { model, isEditPreviewLayer } = props;
 
   useEffect(() => {
-    model.setRerenderTrigger(triggerRerender);
+    if (isEditPreviewLayer === false) {
+      model.setRerenderTrigger(triggerRerender);
+    }
 
     return () => {
-      model.setRerenderTrigger(undefined);
+      if (isEditPreviewLayer === false) {
+        model.setRerenderTrigger(undefined);
+      }
     };
   }, []);
 };

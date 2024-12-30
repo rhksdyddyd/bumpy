@@ -144,7 +144,7 @@ export function getAllGroupMemeberFromRootGroup(graphicModel: GraphicModel): Arr
  * @param graphicModel 부모 group 을 찾을 grahpicModel
  * @returns 부모 group을 모은 array
  */
-export function getAncestorsList(
+export function getAllParentGroupList(
   graphicModel: GraphicModel,
   startFromRootGroup: boolean
 ): Array<GraphicModel> {

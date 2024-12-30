@@ -1,7 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import useAppStore from 'hook/store/useAppStore';
 import useRerender from 'hook/store/useRerender';
-import EditViewCursorStyleProxyComponent from './EditViewCursorStyleProxyComponent';
 import EditViewEventProxyComponent from './EditViewEventProxyComponent';
 
 const EditViewProxyLayerComponent = (): React.JSX.Element => {
@@ -18,18 +17,8 @@ const EditViewProxyLayerComponent = (): React.JSX.Element => {
   }, []);
 
   const isEnabled = proxyLayerInfoContainer.getIsEditViewProxyLayerEnabled();
-  const isEventProxyEnabled = proxyLayerInfoContainer.getIsEditViewEventProxyEnabled();
 
-  return (
-    <>
-      {isEnabled && (
-        <>
-          {isEventProxyEnabled && <EditViewEventProxyComponent />}
-          <EditViewCursorStyleProxyComponent />
-        </>
-      )}
-    </>
-  );
+  return <>{isEnabled && <EditViewEventProxyComponent />}</>;
 };
 
 export default EditViewProxyLayerComponent;

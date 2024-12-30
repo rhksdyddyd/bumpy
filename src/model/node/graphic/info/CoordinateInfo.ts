@@ -41,25 +41,25 @@ export default class CoordinateInfo {
    * group에서만 사용합니다.
    * 도형 묶음을 처음 group으로 하였을 때 group의 x 좌표
    */
-  private groupX: number;
+  private groupX: Nullable<number>;
 
   /**
    * group에서만 사용합니다.
    * 도형 묶음을 처음 group으로 하였을 때 group의 y 좌표
    */
-  private groupY: number;
+  private groupY: Nullable<number>;
 
   /**
    * group에서만 사용합니다.
    * 도형 묶음을 처음 group으로 하였을 때 group의 너비
    */
-  private groupWidth: number;
+  private groupWidth: Nullable<number>;
 
   /**
    * group에서만 사용합니다.
    * 도형 묶음을 처음 group으로 하였을 때 group의 높이
    */
-  private groupHeight: number;
+  private groupHeight: Nullable<number>;
 
   /**
    * 생성자
@@ -225,7 +225,7 @@ export default class CoordinateInfo {
    * @param groupX 도형 묶음을 처음 group으로 하였을 때 group의 x 좌표
    */
   @boundMethod
-  public setGroupX(groupX: number): void {
+  public setGroupX(groupX: Nullable<number>): void {
     this.groupX = groupX;
   }
 
@@ -236,7 +236,7 @@ export default class CoordinateInfo {
    * @returns 도형 묶음을 처음 group으로 하였을 때 group의 x 좌표
    */
   @boundMethod
-  public getGroupX(): number {
+  public getGroupX(): Nullable<number> {
     return this.groupX;
   }
 
@@ -247,7 +247,7 @@ export default class CoordinateInfo {
    * @param groupY 도형 묶음을 처음 group으로 하였을 때 group의 y 좌표
    */
   @boundMethod
-  public setGroupY(groupY: number): void {
+  public setGroupY(groupY: Nullable<number>): void {
     this.groupY = groupY;
   }
 
@@ -258,7 +258,7 @@ export default class CoordinateInfo {
    * @returns 도형 묶음을 처음 group으로 하였을 때 group의 y 좌표
    */
   @boundMethod
-  public getGroupY(): number {
+  public getGroupY(): Nullable<number> {
     return this.groupY;
   }
 
@@ -269,7 +269,7 @@ export default class CoordinateInfo {
    * @param groupWidth 도형 묶음을 처음 group으로 하였을 때 group의 너비
    */
   @boundMethod
-  public setGroupWidth(groupWidth: number): void {
+  public setGroupWidth(groupWidth: Nullable<number>): void {
     this.groupWidth = groupWidth;
   }
 
@@ -280,7 +280,7 @@ export default class CoordinateInfo {
    * @returns 도형 묶음을 처음 group으로 하였을 때 group의 너비
    */
   @boundMethod
-  public getGroupWidth(): number {
+  public getGroupWidth(): Nullable<number> {
     return this.groupWidth;
   }
 
@@ -291,7 +291,7 @@ export default class CoordinateInfo {
    * @param groupHeight 도형 묶음을 처음 group으로 하였을 때 group의 높이
    */
   @boundMethod
-  public setGroupHeight(groupHeight: number): void {
+  public setGroupHeight(groupHeight: Nullable<number>): void {
     this.groupHeight = groupHeight;
   }
 
@@ -302,7 +302,7 @@ export default class CoordinateInfo {
    * @returns 도형 묶음을 처음 group으로 하였을 때 group의 높이
    */
   @boundMethod
-  public getGroupHeight(): number {
+  public getGroupHeight(): Nullable<number> {
     return this.groupHeight;
   }
 

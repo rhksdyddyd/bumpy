@@ -70,8 +70,8 @@ export default class CommandCompositor {
     this.executalbeSimpleCommandIndex = 0;
     this.postSimpleCommandList = [];
     this.undoable = true;
-    this.oldEventState = editableContext.getEventState();
-    this.newEventState = editableContext.getEventState();
+    this.oldEventState = EventStateEnum.IDLE;
+    this.newEventState = EventStateEnum.IDLE;
     this.oldSelectionContainer = editableContext.getSelectionContainer().clone();
     this.newSelectionContainer = editableContext.getSelectionContainer().clone();
   }

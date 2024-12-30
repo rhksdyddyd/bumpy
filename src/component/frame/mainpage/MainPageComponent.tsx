@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import RibbonComponent from 'component/frame/ribbon/RibbonComponent';
 import WorkAreaComponent from 'component/frame/workarea/WorkAreaComponent';
 import styles from 'scss/component/frame/mainpage/MainPage.module.scss';
+import useMousePressedTracker from 'hook/component/frame/mainpage/useMousePressedTracker';
 import AppAreaProxyLayerComponent from './proxylayer/apparea/AppAreaProxyLayerComponent';
 import EditViewProxyLayerComponent from './proxylayer/editview/EditViewProxyLayerComponent';
 
@@ -13,6 +14,7 @@ import EditViewProxyLayerComponent from './proxylayer/editview/EditViewProxyLaye
  * i18n을 init 합니다.
  */
 const MainPageComponent = (): React.JSX.Element => {
+  useMousePressedTracker();
   const i18n = i18nInit();
 
   return (

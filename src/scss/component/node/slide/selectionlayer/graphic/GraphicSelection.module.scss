@@ -1,0 +1,68 @@
+.container {
+  position: absolute
+}
+
+.rotate_handle_svg {
+  position: absolute;
+  pointer-events: none;
+}
+
+.rotate_handle_event_g {
+  visibility: hidden;
+  pointer-events: all;
+}
+
+.rotate_handle_event_rect {
+  rx: 20;
+  ry: 20;  
+}
+
+.rotate_handle_g {
+  display: inherit;
+  pointer-events: none;
+}
+
+.rotate_handle_rect {
+  rx: 20;
+  ry: 20;
+  fill: #0bb30b;
+}
+
+.rotate_handle_line {
+  stroke: #000;
+  stroke-width: 1px;
+  opacity: 0.4;
+}
+
+.resize_handle_svg {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.resize_handle_outline_g {
+  display: inherit;
+}
+
+.resize_handle_outline {
+  fill: none;
+  stroke: #777;
+  stroke-width: 1px;
+}
+
+.resize_handle_outline_event {
+  fill: none;
+  pointer-events: visibleStroke;
+  stroke: none;
+  stroke-width: 3px;
+}
+
+.resize_handle_g {
+  pointer-events: all;
+}
+
+.resize_handle_rect {
+  fill: #fff;
+  stroke: #777;
+  stroke-width: 1px;
+}

@@ -1,1 +1,1 @@
-export const EditViewSizeTrackerId = 'EditViewSizeHolder';
+export const EditViewSizeTrackerId = 'EditViewSizeTracker';

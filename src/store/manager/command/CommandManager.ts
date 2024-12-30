@@ -104,7 +104,7 @@ export default class CommandManager {
         }
 
         // simple command 를 CommandController 통해서 CommandCompositor 에 append 하는 과정
-        const response = commandHandler.processCommand(commandProps, ctx);
+        const response = commandHandler.processCommand(ctx, commandProps);
         if (response.isValid === false) {
           isCommandValid = false;
           commandController.fallback();

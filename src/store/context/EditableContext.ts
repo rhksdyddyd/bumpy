@@ -1,6 +1,7 @@
 import { boundMethod } from 'autobind-decorator';
 import SlideModel from 'model/node/slide/SlideModel';
 import TreeNode from 'model/node/TreeNode';
+import GraphicEditInfoContainer from 'store/container/edit/GraphicEditInfoContainer';
 import ProxyLayerInfoContainer from 'store/container/proxylayer/ProxyLayerInfoContainer';
 import UIContainer from 'store/container/ui/UIContainer';
 import ViewModeContainer from 'store/container/viewmode/ViewModeContainer';
@@ -85,7 +86,7 @@ export default class EditableContext {
   /**
    * shape editing과 관련된 정보를 보관합니다.
    */
-  // private readonly graphicEditInfoContainer: GraphicEditInfoContainer;
+  private readonly graphicEditInfoContainer: GraphicEditInfoContainer;
 
   /**
    * 강제로 rerender를 발생시키기 위해 모아놓은 trigger 함수의 list입니다.
@@ -111,7 +112,7 @@ export default class EditableContext {
     this.viewModeContainer = new ViewModeContainer();
     // this.shortCutContainer = new ShortCutContainer();
     // this.propContainer = new PropContainer();
-    // this.graphicEditInfoContainer = new GraphicEditInfoContainer();
+    this.graphicEditInfoContainer = new GraphicEditInfoContainer();
     this.rerenderTriggerList = [];
   }
 
@@ -297,10 +298,10 @@ export default class EditableContext {
   //     return this.propContainer;
   // }
 
-  // @boundMethod
-  // public getGraphicEditInfoContainer(): GraphicEditInfoContainer {
-  //     return this.graphicEditInfoContainer;
-  // }
+  @boundMethod
+  public getGraphicEditInfoContainer(): GraphicEditInfoContainer {
+    return this.graphicEditInfoContainer;
+  }
 
   /**
    * component의 rerender를 발생시킬 수 있는 함수를 append 합니다

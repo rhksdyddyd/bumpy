@@ -14,8 +14,8 @@ abstract class CommandHandler {
    * @returns command 수행 결과에 따른 CommandHandlerResponse
    */
   public abstract processCommand(
-    commandProps: ICommandProps,
-    ctx: AppContext
+    ctx: AppContext,
+    commandProps: ICommandProps
   ): ICommandHandlerResponse;
 }
 

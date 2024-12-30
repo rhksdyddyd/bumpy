@@ -25,7 +25,7 @@ const useEditViewProxyLayer: Hook = () => {
     ) {
       const rect = editViewSizeTrackerRef.current.getBoundingClientRect();
       const editViewProxyLayerElement = editViewProxyLayerRef.current;
-      editViewProxyLayerElement.style.cssText = `top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;`;
+      editViewProxyLayerElement.style.cssText = `${editViewProxyLayerElement.style.cssText}top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;`;
     }
   };
 

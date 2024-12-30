@@ -213,7 +213,7 @@ abstract class TreeNode {
    * @param ctx trigger를 등록 할 AppContext
    */
   @boundMethod
-  public appendRerenderTrigger(ctx: AppContext): void {
+  public requestRerender(ctx: AppContext): void {
     if (this.rerenderTrigger !== undefined) {
       ctx.getEditableContext().appendRerenderTrigger(this.rerenderTrigger);
     }

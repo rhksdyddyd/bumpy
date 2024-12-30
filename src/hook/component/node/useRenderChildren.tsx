@@ -3,12 +3,10 @@ import TreeNodeFactoryComponent from 'component/node/factory/TreeNodeFactoryComp
 import { TreeNodeComponentProps } from 'types/component/node/factory/TreeNodeFactoryComponentTypes';
 
 type Hook = (props: TreeNodeComponentProps) => {
-  parentHTMLElementRef: React.RefObject<HTMLDivElement>;
   renderedChildren: React.JSX.Element;
 };
 
 const useRenderChildren: Hook = (props: TreeNodeComponentProps) => {
-  const parentHTMLElementRef = useRef<HTMLDivElement>(null);
   const rerenderChildrenRef = useRef<number>(0);
 
   const { model, zoomRatio } = props;
@@ -21,19 +19,29 @@ const useRenderChildren: Hook = (props: TreeNodeComponentProps) => {
     };
   }, []);
 
-  const renderedChildren = useMemo(() => {
-    return (
-      <>
-        {model.mapChild(child => {
-          return (
-            <TreeNodeFactoryComponent key={`tree_node_${child.getId()}`} {...props} model={child} />
-          );
-        })}
-      </>
-    );
-  }, [rerenderChildrenRef.current, zoomRatio]);
+  const renderedChildren = (
+    <>
+      {model.mapChild(child => {
+        return (
+          <TreeNodeFactoryComponent key={`tree_node_${child.getId()}`} {...props} model={child} />
+        );
+      })}
+    </>
+  );
 
-  return { parentHTMLElementRef, renderedChildren };
+  // const renderedChildren = useMemo(() => {
+  //   return (
+  //     <>
+  //       {model.mapChild(child => {
+  //         return (
+  //           <TreeNodeFactoryComponent key={`tree_node_${child.getId()}`} {...props} model={child} />
+  //         );
+  //       })}
+  //     </>
+  //   );
+  // }, [rerenderChildrenRef.current, zoomRatio]);
+
+  return { renderedChildren };
 };
 
 export default useRenderChildren;
