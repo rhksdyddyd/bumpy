@@ -26,7 +26,7 @@ export default class SelectionContainer {
    * @returns graphicSelectionContainer
    */
   @boundMethod
-  public getGraphicModelSelectionCotnainer(): GraphicModelSelectionContainer {
+  public getGraphicModelSelectionContainer(): GraphicModelSelectionContainer {
     return this.graphicModelSelectionContainer;
   }
 

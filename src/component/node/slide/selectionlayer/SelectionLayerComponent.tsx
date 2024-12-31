@@ -22,13 +22,13 @@ const SelectionLayerComponent = (): React.JSX.Element => {
     };
   });
 
-  if (graphicEditInfoContainer.isEditPreivewLayerActivated() === true) {
+  if (graphicEditInfoContainer.isEditingActivated() === true) {
     return <></>;
   }
 
   const selectionContainer = appStore.getAppContext().getEditableContext().getSelectionContainer();
   const selectedGraphicModels = selectionContainer
-    .getGraphicModelSelectionCotnainer()
+    .getGraphicModelSelectionContainer()
     .getSelectedGraphicModels();
 
   let extraSelectionTarget: Nullable<GraphicModel>;
@@ -46,7 +46,13 @@ const SelectionLayerComponent = (): React.JSX.Element => {
         <GraphicSelectionComponent graphicModel={extraSelectionTarget} isDirectlySelected={false} />
       )}
       {selectedGraphicModels.map(graphicModel => {
-        return <GraphicSelectionComponent graphicModel={graphicModel} isDirectlySelected />;
+        return (
+          <GraphicSelectionComponent
+            key={graphicModel.getId()}
+            graphicModel={graphicModel}
+            isDirectlySelected
+          />
+        );
       })}
     </>
   );

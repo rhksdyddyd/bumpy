@@ -3,11 +3,12 @@ import GraphicEditInfoContainer from 'store/container/edit/GraphicEditInfoContai
 import SelectionContainer from 'store/manager/selection/SelectionContainer';
 import AppContext from 'store/context/AppContext';
 import { EventStateEnum } from 'types/store/event/EventStateEnum';
+import { CommandEnum } from 'types/store/command/CommandEnum';
 
 export function getSelectedGraphicModelList(
   selectionContainer: SelectionContainer
 ): GraphicModel[] {
-  return selectionContainer.getGraphicModelSelectionCotnainer().getSelectedGraphicModels();
+  return selectionContainer.getGraphicModelSelectionContainer().getSelectedGraphicModels();
 }
 
 export function getEditingTargetGraphicModelList(
@@ -78,10 +79,15 @@ export function collectEditPreviewLayerGraphicModelList(
 export function clearGraphicEditContext(ctx: AppContext): void {
   const editableContext = ctx.getEditableContext();
   const graphicEditInfoContainer = editableContext.getGraphicEditInfoContainer();
+  const proxryLayerInfoContainer = editableContext.getProxyLayerInfoContainer();
 
   editableContext.setEventState(EventStateEnum.IDLE);
   graphicEditInfoContainer.setIsBeingEditedToAllEditingDependentGraphicModels(false);
   graphicEditInfoContainer.clear();
+  graphicEditInfoContainer.requestRerenderEditPreviewLayer(ctx);
+
+  proxryLayerInfoContainer.disableAppAreaProxyLayer();
+  proxryLayerInfoContainer.disableEditViewProxyLayer();
 }
 
 export function updateNewSelectionContainer(
@@ -93,17 +99,15 @@ export function updateNewSelectionContainer(
 
   const selectionTargetList =
     graphicModelList ??
-    oldSelectionContainer.getGraphicModelSelectionCotnainer().getSelectedGraphicModels();
+    oldSelectionContainer.getGraphicModelSelectionContainer().getSelectedGraphicModels();
 
   const newSelectionContainer = editableContext.createSelectionContainer();
   selectionTargetList.forEach(graphicModel => {
-    newSelectionContainer.getGraphicModelSelectionCotnainer().appendTreeNode(graphicModel);
+    newSelectionContainer.getGraphicModelSelectionContainer().appendTreeNode(graphicModel);
   });
 
-  const commandProps = editableContext.getCommandProps();
-  if (commandProps !== undefined) {
-    editableContext.setCommandProps({ ...commandProps, newSelectionContainer });
-  }
+  const commandProps = editableContext.getCommandProps() ?? { commandId: CommandEnum.INVALID };
+  editableContext.setCommandProps({ ...commandProps, newSelectionContainer });
 }
 
 function filterGraphicModelList(

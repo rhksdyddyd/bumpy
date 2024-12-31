@@ -4,6 +4,9 @@ import EventHandler from 'store/manager/event/handler/EventHandler';
 import { EventStateEnum } from 'types/store/event/EventStateEnum';
 import { EventConstructorMap, EventMap } from 'types/store/event/EventTypes';
 import GraphicInsertEventHandler from './handler/graphic/GraphicInsertEventHandler';
+import GraphicEventHandler from './handler/graphic/GraphicEventHandler';
+import GraphicSelectionEventHandler from './handler/graphic/GraphicSelectionEventHandler';
+import GraphicMoveEventHandler from './handler/graphic/GraphicMoveEventHandler';
 
 /**
  * EventState 에 따라 어떤 event handler 들이 순서대로 동작하는 지를 관리합니다.
@@ -51,9 +54,9 @@ export default class EventMapper {
    */
   protected createEventConstructorMap(): EventConstructorMap {
     return new Map([
-      [EventStateEnum.IDLE, []],
+      [EventStateEnum.IDLE, [GraphicEventHandler]],
       [EventStateEnum.GRAPHIC_INSERT, [GraphicInsertEventHandler]],
-      [EventStateEnum.GRAPHIC_MOVE, []],
+      [EventStateEnum.GRAPHIC_MOVE, [GraphicSelectionEventHandler, GraphicMoveEventHandler]],
       [EventStateEnum.GRAPHIC_RESIZE, []],
       [EventStateEnum.GRAPHIC_ROTATE, []],
     ]);

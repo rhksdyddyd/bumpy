@@ -4,6 +4,7 @@ import GraphicInsertCommandHandler from 'store/manager/command/commandhandler/gr
 import CommandMapper from 'store/manager/command/CommandMapper/CommandMapper';
 import { CommandEnum } from 'types/store/command/CommandEnum';
 import { CommandCreatorMapType, CommandMapType } from 'types/store/command/CommandTypes';
+import GraphicMoveCommandHandler from '../commandhandler/graphic/GraphicMoveCommandHandler';
 
 /**
  * 편집 모드 (Edit) 인 경우에 대한 command mapper 입니다.
@@ -74,6 +75,16 @@ class EditModeCommandMapper extends CommandMapper {
         GraphicInsertCommandHandler
       );
       this.getCommandMap().set(CommandEnum.GRAPHIC_INSERT_ABORT, [graphicInsertCommandHandler]);
+    });
+    this.getCommandCreatorMap().set(CommandEnum.GRAPHIC_MOVE, () => {
+      const graphicMoveCommandHandler =
+        commandHandlerFactory.getTargetCommandHandler(GraphicMoveCommandHandler);
+      this.getCommandMap().set(CommandEnum.GRAPHIC_MOVE, [graphicMoveCommandHandler]);
+    });
+    this.getCommandCreatorMap().set(CommandEnum.GRAPHIC_MOVE_ABORT, () => {
+      const graphicMoveCommandHandler =
+        commandHandlerFactory.getTargetCommandHandler(GraphicMoveCommandHandler);
+      this.getCommandMap().set(CommandEnum.GRAPHIC_MOVE_ABORT, [graphicMoveCommandHandler]);
     });
   }
 }

@@ -13,11 +13,11 @@ type UseRerenderHook = () => {
  * @returns Rerender를 trigger 할 수 있는 함수를 반환합니다.
  */
 const useRerender: UseRerenderHook = () => {
-  const [, setValue] = useState<boolean>(false);
+  const [, setValue] = useState<number>(0);
 
   return {
     triggerRerender: () => {
-      setValue(prev => !prev);
+      setValue(prev => prev + 1);
     },
   };
 };

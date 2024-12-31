@@ -24,7 +24,7 @@ const EditPreviewlayerComponent = (): React.JSX.Element => {
 
   const viewModeContainer = appStore.getAppContext().getEditableContext().getViewModeContainer();
   const zoomRatio = viewModeContainer.getZoomRatio();
-  const isEditPreivewLayerActivated = graphicEditInfoContainer.isEditPreivewLayerActivated();
+  const isEditPreivewLayerActivated = graphicEditInfoContainer.isEditingActivated();
 
   return (
     <div className={classNames(styles.conatiner)}>

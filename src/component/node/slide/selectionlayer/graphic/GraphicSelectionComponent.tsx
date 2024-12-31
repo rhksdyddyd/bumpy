@@ -179,6 +179,7 @@ const GraphicSelectionComponent = (props: GraphicSelectionComponentProps): React
 
             return (
               <g
+                key={item}
                 className={classNames(styles.resize_handle_g)}
                 transform={`matrix(1,0,0,1,${left},${top})`}
                 style={{ cursor }}

@@ -3,6 +3,7 @@ import SlideModel from 'model/node/slide/SlideModel';
 import TreeNode from 'model/node/TreeNode';
 import GraphicEditInfoContainer from 'store/container/edit/GraphicEditInfoContainer';
 import ProxyLayerInfoContainer from 'store/container/proxylayer/ProxyLayerInfoContainer';
+import ShortcutContainer from 'store/container/shortcut/ShortcutContainer';
 import UIContainer from 'store/container/ui/UIContainer';
 import ViewModeContainer from 'store/container/viewmode/ViewModeContainer';
 import CommandController from 'store/manager/command/CommandController';
@@ -73,10 +74,11 @@ export default class EditableContext {
   private readonly proxyLayerInfoContainer: ProxyLayerInfoContainer;
 
   private readonly viewModeContainer: ViewModeContainer;
+
   /*
    * 단축키 관련 정보를 보관합니다.
    */
-  // private readonly shortcutContainer: ShortcutContainer;
+  private readonly shortcutContainer: ShortcutContainer;
 
   /**
    * 현재 Selection을 바탕으로 업데이트 할 정보를 보관합니다.
@@ -110,7 +112,7 @@ export default class EditableContext {
     this.uiContainer = new UIContainer();
     this.proxyLayerInfoContainer = new ProxyLayerInfoContainer();
     this.viewModeContainer = new ViewModeContainer();
-    // this.shortCutContainer = new ShortCutContainer();
+    this.shortcutContainer = new ShortcutContainer();
     // this.propContainer = new PropContainer();
     this.graphicEditInfoContainer = new GraphicEditInfoContainer();
     this.rerenderTriggerList = [];
@@ -288,10 +290,10 @@ export default class EditableContext {
     return this.viewModeContainer;
   }
 
-  // @boundMethod
-  // public getShortCutContainer(): ShortCutContainer {
-  //     return this.shortCutContainer;
-  // }
+  @boundMethod
+  public getShortcutContainer(): ShortcutContainer {
+    return this.shortcutContainer;
+  }
 
   // @boundMethod
   // public getPropContainer(): PropContainer {

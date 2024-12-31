@@ -36,7 +36,7 @@ interface IGraphicInsertDefaultCommandProps {
     | CommandEnum.GRAPHIC_INSERT_ABORT;
 }
 
-type IGraphicInsertCommandProps =
+type GraphicInsertCommandProps =
   | IGraphicInsertSetUpCommandProps
   | IGraphicInsertDefaultCommandProps;
 
@@ -53,7 +53,7 @@ export default class GraphicInsertCommandHandler extends CommandHandler {
    */
   public processCommand(
     ctx: AppContext,
-    commandProps: IGraphicInsertCommandProps
+    commandProps: GraphicInsertCommandProps
   ): ICommandHandlerResponse {
     switch (commandProps.commandId) {
       case CommandEnum.GRAPHIC_INSERT_SET_UP: {

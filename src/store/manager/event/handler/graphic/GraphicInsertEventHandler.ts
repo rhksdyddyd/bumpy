@@ -206,7 +206,7 @@ class GraphicInsertEventHandler extends EventHandler {
     }
 
     event.stopPropagation();
-    return false;
+    return true;
   }
 
   @boundMethod

@@ -282,7 +282,7 @@ class GraphicEditInfoContainer {
   }
 
   @boundMethod
-  public isEditPreivewLayerActivated(): boolean {
+  public isEditingActivated(): boolean {
     return this.graphicEditEventSubState === GraphicEditEventSubStateEnum.DRAG;
   }
 }

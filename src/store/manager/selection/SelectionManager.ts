@@ -29,8 +29,6 @@ export default class SelectionManager {
         editableContext.setSelectionContainer(newSelectionContainer);
       }
       editableContext.getGraphicEditInfoContainer().requestRerenderSelectionLayer(ctx);
-    } else {
-      throw Error();
     }
   }
 }

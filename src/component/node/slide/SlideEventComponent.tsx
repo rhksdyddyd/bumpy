@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { TreeNodeComponentProps } from 'types/component/node/factory/TreeNodeFactoryComponentTypes';
 
@@ -8,6 +8,7 @@ import useEventListener from 'hook/event/useEventListener';
 const SlideEventComponent = (
   props: PropsWithChildren<TreeNodeComponentProps>
 ): React.JSX.Element => {
+  const ref = useRef<HTMLDivElement>(null);
   const { model, children } = props;
   const {
     handleMouseDown,
@@ -18,9 +19,16 @@ const SlideEventComponent = (
     handleKeyUp,
   } = useEventListener(model);
 
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
+
   return (
     <div
-      aria-hidden="true"
+      ref={ref}
+      role="none"
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex={0}
       className={classNames(styles.event)}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
@@ -28,6 +36,9 @@ const SlideEventComponent = (
       onWheel={handleWheel}
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
+      onBlur={() => {
+        ref.current?.focus();
+      }}
     >
       {children}
     </div>

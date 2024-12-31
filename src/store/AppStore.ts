@@ -95,9 +95,8 @@ export default class AppStore {
       }
     }
 
-    if (this.commandManager.execute(this.ctx) === true) {
-      this.selectionManager.updateSelection(this.ctx);
-    }
+    this.commandManager.execute(this.ctx);
+    this.selectionManager.updateSelection(this.ctx);
 
     this.getAppContext().getEditableContext().flushRerenderTriggerList();
   }
