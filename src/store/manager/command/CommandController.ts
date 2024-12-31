@@ -12,7 +12,7 @@ export default class CommandController {
   /**
    * 실제 simpleCommand를 관리하는 class 입니다.
    */
-  protected commandCompositor: CommandCompositor;
+  private commandCompositor: CommandCompositor;
 
   /**
    * 생성자

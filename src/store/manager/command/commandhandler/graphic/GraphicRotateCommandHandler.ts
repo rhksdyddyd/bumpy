@@ -10,21 +10,21 @@ import CommandHandler from '../CommandHandler';
 import SetGraphicAttributeCommand from '../../simplecommand/node/graphic/SetGraphicAttributeCommand';
 import RequestRerenderTreeNodeComponentCommand from '../../simplecommand/rerender/RequestRerenderTreeNodeComponentCommand';
 
-interface IGraphicMoveCommandProps {
-  commandId: CommandEnum.GRAPHIC_MOVE | CommandEnum.GRAPHIC_MOVE_ABORT;
+export interface IGraphicRotateCommandProps {
+  commandId: CommandEnum.GRAPHIC_ROTATE | CommandEnum.GRAPHIC_ROTATE_ABORT;
 }
 
-export default class GraphicMoveCommandHandler extends CommandHandler {
-  public processCommand(
+class GraphicRotateCommandHandler extends CommandHandler {
+  public override processCommand(
     ctx: AppContext,
-    commandProps: IGraphicMoveCommandProps
+    commandProps: IGraphicRotateCommandProps
   ): ICommandHandlerResponse {
     switch (commandProps.commandId) {
-      case CommandEnum.GRAPHIC_MOVE: {
-        this.moveGraphicModelByEditContext(ctx, commandProps);
+      case CommandEnum.GRAPHIC_ROTATE: {
+        this.rotateGraphicModelByEditContext(ctx);
         break;
       }
-      case CommandEnum.GRAPHIC_MOVE_ABORT: {
+      case CommandEnum.GRAPHIC_ROTATE_ABORT: {
         this.clearGraphicModelEditContext(ctx);
         break;
       }
@@ -36,10 +36,7 @@ export default class GraphicMoveCommandHandler extends CommandHandler {
   }
 
   @boundMethod
-  private moveGraphicModelByEditContext(
-    ctx: AppContext,
-    commandProps: IGraphicMoveCommandProps
-  ): void {
+  private rotateGraphicModelByEditContext(ctx: AppContext): void {
     const editableContext = ctx.getEditableContext();
     const graphicEditInfoContainer = editableContext.getGraphicEditInfoContainer();
     const commandController = editableContext.getCommandController();
@@ -81,7 +78,7 @@ export default class GraphicMoveCommandHandler extends CommandHandler {
   }
 
   @boundMethod
-  private clearGraphicModelEditContext(ctx: AppContext): void {
+  protected clearGraphicModelEditContext(ctx: AppContext): void {
     const editableContext = ctx.getEditableContext();
     const graphicEditInfoContainer = editableContext.getGraphicEditInfoContainer();
     graphicEditInfoContainer.getEditingGraphicModelList().forEach(graphicModel => {
@@ -90,3 +87,5 @@ export default class GraphicMoveCommandHandler extends CommandHandler {
     clearGraphicEditContext(ctx);
   }
 }
+
+export default GraphicRotateCommandHandler;

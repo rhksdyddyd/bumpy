@@ -14,7 +14,7 @@ export default class CommandCompositor {
   /**
    * 실제 동작 정보를 담고있는 simpleCommand 들의 list 입니다.
    */
-  protected simpleCommandList: SimpleCommand[];
+  private simpleCommandList: SimpleCommand[];
 
   /**
    * 현재 실행할 수 있는 simpleCommand의 index입니다.
@@ -29,7 +29,7 @@ export default class CommandCompositor {
    * simple command 들의 list 로, 후처리로 진행되어야 하는 simple command 들입니다.
    * Do, undo, redo 시 commandList 의 작업이 마쳐진 뒤 postCommandList 의 작업을 수행합니다.
    */
-  protected postSimpleCommandList: SimpleCommand[];
+  private postSimpleCommandList: SimpleCommand[];
 
   /**
    * Undo 가 가능한 command 인지를 나타냅니다.

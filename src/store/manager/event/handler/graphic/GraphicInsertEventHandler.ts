@@ -228,7 +228,7 @@ class GraphicInsertEventHandler extends EventHandler {
     }
   }
 
-  protected isMouseDownValid(
+  private isMouseDownValid(
     eventState: EventStateEnum,
     graphicEditInfoContainer: GraphicEditInfoContainer
   ): boolean {

@@ -1,7 +1,7 @@
 import * as math from 'mathjs';
 import GraphicModel from 'model/node/graphic/GraphicModel';
 import GraphicEditInfoContainer from 'store/container/edit/GraphicEditInfoContainer';
-import { IPoint, IResizeRatio } from 'types/common/geometry/GeometryTypes';
+import { IPoint, IResizeRatio, ISize } from 'types/common/geometry/GeometryTypes';
 import { rotatePointAroundPivot } from 'util/coordinate/CoordinateUtil';
 import {
   getDisplayedCenterCoordinate,
@@ -20,13 +20,16 @@ export function getGraphicWrapperCoordinateStyle(
 ): React.CSSProperties {
   const coordinateStyle: React.CSSProperties = {};
 
-  const transformMatrix = calculateDisplayedTransformMatrix(
+  const { size, transformMatrix } = calculateDisplayedTransformMatrix(
     graphicEditInfoContainer,
     graphicModel,
     isEditPreviewLayer
   );
 
   coordinateStyle.transform = matrixToStyleString(transformMatrix);
+
+  coordinateStyle.width = `${size.width}px`;
+  coordinateStyle.height = `${size.height}px`;
 
   return coordinateStyle;
 }
@@ -35,7 +38,7 @@ function calculateDisplayedTransformMatrix(
   graphicEditInfoContainer: GraphicEditInfoContainer,
   graphicModel: GraphicModel,
   isEditPreviewLayer: boolean
-): math.Matrix {
+): { size: ISize; transformMatrix: math.Matrix } {
   let transformMatrix: math.Matrix;
 
   const targetPosition = getDisplayedPosition(
@@ -136,7 +139,7 @@ function calculateDisplayedTransformMatrix(
     }
   }
 
-  return transformMatrix;
+  return { size: targetSize, transformMatrix };
 }
 
 function getTransformMatrix(translate: IPoint, scale: IResizeRatio, rotation: number): math.Matrix {

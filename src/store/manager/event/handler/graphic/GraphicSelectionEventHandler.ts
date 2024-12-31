@@ -98,7 +98,7 @@ class GraphicSelectionEventHandler extends EventHandler {
     return true;
   }
 
-  protected isMouseUpValid(
+  private isMouseUpValid(
     eventState: EventStateEnum,
     graphicEditInfoContainer: GraphicEditInfoContainer
   ): boolean {

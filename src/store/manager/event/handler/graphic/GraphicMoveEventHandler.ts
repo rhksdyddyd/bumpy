@@ -61,6 +61,7 @@ class GraphicMoveEventHandler extends EventHandler {
 
   @boundMethod
   public override onMouseUp(event: MouseEvent, ctx: AppContext): boolean {
+    event.stopPropagation();
     const editableContext = ctx.getEditableContext();
     const eventState = editableContext.getEventState();
     const selectionContainer = editableContext.getSelectionContainer();
@@ -79,10 +80,10 @@ class GraphicMoveEventHandler extends EventHandler {
     }
 
     if (this.isMouseUpValid(eventState, graphicEditInfoContainer, selectionContainer) === false) {
-      const props = {
+      const commandProps = {
         commandId: CommandEnum.GRAPHIC_MOVE_ABORT,
       };
-      editableContext.setCommandProps(props);
+      editableContext.setCommandProps(commandProps);
 
       return true;
     }
