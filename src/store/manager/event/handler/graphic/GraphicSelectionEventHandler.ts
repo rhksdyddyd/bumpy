@@ -12,7 +12,7 @@ import { CommandEnum } from 'types/store/command/CommandEnum';
 import EventHandler from '../EventHandler';
 import MouseEvent from '../../wrapper/MouseEvent';
 
-class GraphicSelectionEventHandler extends EventHandler {
+export default class GraphicSelectionEventHandler extends EventHandler {
   @boundMethod
   public override onMouseDown(event: MouseEvent, ctx: AppContext): boolean {
     event.stopPropagation();
@@ -743,5 +743,3 @@ class GraphicSelectionEventHandler extends EventHandler {
     }
   }
 }
-
-export default GraphicSelectionEventHandler;

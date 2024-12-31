@@ -22,7 +22,7 @@ import EventHandler from '../EventHandler';
 import MouseEvent from '../../wrapper/MouseEvent';
 import KeyEvent from '../../wrapper/KeyEvent';
 
-class GraphicMoveEventHandler extends EventHandler {
+export default class GraphicMoveEventHandler extends EventHandler {
   @boundMethod
   public override onDrag(event: MouseEvent, ctx: AppContext): boolean {
     event.stopPropagation();
@@ -243,5 +243,3 @@ class GraphicMoveEventHandler extends EventHandler {
     graphicEditInfoContainer.requestRerenderSelectionLayer(ctx);
   }
 }
-
-export default GraphicMoveEventHandler;

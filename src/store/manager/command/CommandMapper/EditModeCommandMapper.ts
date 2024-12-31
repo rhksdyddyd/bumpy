@@ -6,6 +6,7 @@ import { CommandEnum } from 'types/store/command/CommandEnum';
 import { CommandCreatorMapType, CommandMapType } from 'types/store/command/CommandTypes';
 import GraphicMoveCommandHandler from '../commandhandler/graphic/GraphicMoveCommandHandler';
 import GraphicRotateCommandHandler from '../commandhandler/graphic/GraphicRotateCommandHandler';
+import GraphicResizeCommandHandler from '../commandhandler/graphic/GraphicResizeCommandHandler';
 
 /**
  * 편집 모드 (Edit) 인 경우에 대한 command mapper 입니다.
@@ -98,6 +99,18 @@ class EditModeCommandMapper extends CommandMapper {
         GraphicRotateCommandHandler
       );
       this.getCommandMap().set(CommandEnum.GRAPHIC_ROTATE_ABORT, [graphicRotateCommandHandler]);
+    });
+    this.getCommandCreatorMap().set(CommandEnum.GRAPHIC_RESIZE, () => {
+      const graphicResizeCommandHandler = commandHandlerFactory.getTargetCommandHandler(
+        GraphicResizeCommandHandler
+      );
+      this.getCommandMap().set(CommandEnum.GRAPHIC_RESIZE, [graphicResizeCommandHandler]);
+    });
+    this.getCommandCreatorMap().set(CommandEnum.GRAPHIC_RESIZE_ABORT, () => {
+      const graphicResizeCommandHandler = commandHandlerFactory.getTargetCommandHandler(
+        GraphicResizeCommandHandler
+      );
+      this.getCommandMap().set(CommandEnum.GRAPHIC_RESIZE_ABORT, [graphicResizeCommandHandler]);
     });
   }
 }

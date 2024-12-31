@@ -6,7 +6,7 @@ import EventHandler from '../EventHandler';
 import KeyEvent from '../../wrapper/KeyEvent';
 import MouseEvent from '../../wrapper/MouseEvent';
 
-class GraphicEventHandler extends EventHandler {
+export default class GraphicEventHandler extends EventHandler {
   @boundMethod
   public override onKeyDown(event: KeyEvent, ctx: AppContext): boolean {
     const editableContext = ctx.getEditableContext();
@@ -82,5 +82,3 @@ class GraphicEventHandler extends EventHandler {
     return false;
   }
 }
-
-export default GraphicEventHandler;

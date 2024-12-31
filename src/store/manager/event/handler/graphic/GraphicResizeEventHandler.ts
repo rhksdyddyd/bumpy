@@ -1,5 +1,7 @@
 import { boundMethod } from 'autobind-decorator';
 import AppContext from 'store/context/AppContext';
+import { EventStateEnum } from 'types/store/event/EventStateEnum';
+import { GraphicEditEventSubStateEnum } from 'types/store/container/edit/GraphicEditEventSubStateEnum';
 import SelectionContainer from 'store/manager/selection/SelectionContainer';
 import GraphicEditInfoContainer from 'store/container/edit/GraphicEditInfoContainer';
 import {
@@ -8,25 +10,21 @@ import {
   collectEditPreviewLayerGraphicModelList,
   updateNewSelectionContainer,
 } from 'util/node/graphic/edit/GraphicModelEditingUtil';
-import { ResourceEnum } from 'types/resource/ResourceEnum';
-import { EventStateEnum } from 'types/store/event/EventStateEnum';
-import { GraphicEditEventSubStateEnum } from 'types/store/container/edit/GraphicEditEventSubStateEnum';
-import { CommandEnum } from 'types/store/command/CommandEnum';
+import { convertClientCoordinateToRenderCoordinate } from 'util/coordinate/RenderCoordinateUtil';
+import GraphicModel from 'model/node/graphic/GraphicModel';
+import { IPoint } from 'types/common/geometry/GeometryTypes';
 import {
-  applyRotationToGraphicEditRequest,
-  getInitialEditingDisplayedCenterCoordinate,
-  getInitialEditingDisplayedFlipH,
-  getInitialEditingDisplayedFlipV,
+  applyGraphicModelTransformToRenderCoordinate,
+  applyResizeRatioToGraphicEditRequest,
+  calculateResizeRatio,
   updateEditingDependentTreeMember,
 } from 'util/node/graphic/coordinate/GraphicModelCoordinateUtil';
-import { convertClientCoordinateToRenderCoordinate } from 'util/coordinate/RenderCoordinateUtil';
-import { getAngleBetweenThreePoints } from 'util/coordinate/CoordinateUtil';
-import { GraphicEditingHandleEnum } from 'types/store/container/edit/GraphicEditingHandleEnum';
-import EventHandler from '../EventHandler';
+import { CommandEnum } from 'types/store/command/CommandEnum';
 import MouseEvent from '../../wrapper/MouseEvent';
+import EventHandler from '../EventHandler';
 import KeyEvent from '../../wrapper/KeyEvent';
 
-export default class GraphicRotateEventHandler extends EventHandler {
+export default class GraphicResizeEventHandler extends EventHandler {
   @boundMethod
   public override onMouseDown(event: MouseEvent, ctx: AppContext): boolean {
     event.stopPropagation();
@@ -44,7 +42,6 @@ export default class GraphicRotateEventHandler extends EventHandler {
 
     if (
       this.isMouseDownValid(eventState, graphicEditEventSubState) === false ||
-      graphicEditInfoContainer.getGraphicEditingHandle() !== GraphicEditingHandleEnum.ROTATE ||
       eventTargetGraphicModel === undefined
     ) {
       if (graphicEditEventSubState !== GraphicEditEventSubStateEnum.ABORT) {
@@ -71,7 +68,7 @@ export default class GraphicRotateEventHandler extends EventHandler {
 
     graphicEditInfoContainer.setEditingStartedRenderCoordinate(editingStartedRenderCoordinate);
 
-    this.setUpGraphicModelRotateContext(
+    this.setUpGraphicModelResizeContext(
       ctx,
       selectionContainer,
       graphicEditInfoContainer,
@@ -119,51 +116,28 @@ export default class GraphicRotateEventHandler extends EventHandler {
       return true;
     }
 
-    const editingStartedRenderCoordinate =
-      graphicEditInfoContainer.getEditingStartedRenderCoordinate();
-
-    const currentMouseRenderCoordinate = convertClientCoordinateToRenderCoordinate(
-      { x: event.getClientX(), y: event.getClientY() },
+    const appliableMouseDelta = this.calculateAppliableMouseDelta(
+      event,
+      graphicEditInfoContainer,
+      eventTargetGraphicModel,
       zoomRatio
     );
 
-    const eventTargetCenterCoordinate = getInitialEditingDisplayedCenterCoordinate(
+    const resizeRatio = calculateResizeRatio(
       graphicEditInfoContainer,
-      eventTargetGraphicModel
-    );
-
-    const rotatedAngle = getAngleBetweenThreePoints(
-      editingStartedRenderCoordinate,
-      currentMouseRenderCoordinate,
-      eventTargetCenterCoordinate
+      eventTargetGraphicModel,
+      appliableMouseDelta,
+      event.isShiftDown()
     );
 
     const editingGraphicModelList = graphicEditInfoContainer.getEditingGraphicModelList();
 
     editingGraphicModelList.forEach(graphicModel => {
-      const graphicModelEditRequest =
-        graphicEditInfoContainer.getEditingDependentGraphicModelEditRequest(graphicModel);
-      let angleDirection = 1;
-
-      if (graphicModelEditRequest !== undefined) {
-        const initialCoordinateInfo = graphicModelEditRequest.getInitialCoordinateInfo();
-
-        const parentFlipH =
-          getInitialEditingDisplayedFlipH(graphicEditInfoContainer, graphicModel) !==
-          initialCoordinateInfo.getFlipH();
-        const parentFlipV =
-          getInitialEditingDisplayedFlipV(graphicEditInfoContainer, graphicModel) !==
-          initialCoordinateInfo.getFlipV();
-
-        if (parentFlipH !== parentFlipV) {
-          angleDirection = -1;
-        }
-      }
-      applyRotationToGraphicEditRequest(
+      applyResizeRatioToGraphicEditRequest(
         graphicEditInfoContainer,
         graphicModel,
-        rotatedAngle * angleDirection,
-        event.isShiftDown()
+        resizeRatio,
+        true
       );
     });
 
@@ -187,7 +161,7 @@ export default class GraphicRotateEventHandler extends EventHandler {
 
     if (this.isMouseUpValid(eventState, graphicEditInfoContainer) === false) {
       const commandProps = {
-        commandId: CommandEnum.GRAPHIC_ROTATE_ABORT,
+        commandId: CommandEnum.GRAPHIC_RESIZE_ABORT,
       };
       editableContext.setCommandProps(commandProps);
 
@@ -197,7 +171,7 @@ export default class GraphicRotateEventHandler extends EventHandler {
     updateEditingDependentTreeMember(graphicEditInfoContainer);
 
     const commandProps = {
-      commandId: CommandEnum.GRAPHIC_ROTATE,
+      commandId: CommandEnum.GRAPHIC_RESIZE,
     };
 
     editableContext.setCommandProps(commandProps);
@@ -216,13 +190,14 @@ export default class GraphicRotateEventHandler extends EventHandler {
 
   @boundMethod
   public override onKeyDown(event: KeyEvent, ctx: AppContext): boolean {
+    // ToDo. ctrl event, alt event 처리 zoom ratio get
     switch (true) {
       case /^Escape$/.test(event.getKey()): {
         const editableContext = ctx.getEditableContext();
         const graphicEditInfoContainer = editableContext.getGraphicEditInfoContainer();
         graphicEditInfoContainer.abortCurrentEditingState();
         const props = {
-          commandId: CommandEnum.GRAPHIC_ROTATE_ABORT,
+          commandId: CommandEnum.GRAPHIC_RESIZE_ABORT,
         };
         editableContext.setCommandProps(props);
         break;
@@ -247,7 +222,7 @@ export default class GraphicRotateEventHandler extends EventHandler {
     graphicEditEventSubState: GraphicEditEventSubStateEnum
   ): boolean {
     if (
-      eventState !== EventStateEnum.GRAPHIC_ROTATE ||
+      eventState !== EventStateEnum.GRAPHIC_RESIZE ||
       graphicEditEventSubState !== GraphicEditEventSubStateEnum.READY
     ) {
       return false;
@@ -261,10 +236,9 @@ export default class GraphicRotateEventHandler extends EventHandler {
     selectionContainer: Nullable<SelectionContainer>
   ): boolean {
     if (
-      eventState !== EventStateEnum.GRAPHIC_ROTATE ||
+      eventState !== EventStateEnum.GRAPHIC_RESIZE ||
       graphicEditEventSubState !== GraphicEditEventSubStateEnum.DRAG ||
-      selectionContainer === undefined ||
-      selectionContainer.getGraphicModelSelectionContainer() === undefined
+      selectionContainer?.getGraphicModelSelectionContainer() === undefined
     ) {
       return false;
     }
@@ -279,7 +253,7 @@ export default class GraphicRotateEventHandler extends EventHandler {
     const eventTargetGraphicModel = graphicEditInfoContainer.getEventTargetGraphicModel();
 
     if (
-      eventState !== EventStateEnum.GRAPHIC_ROTATE ||
+      eventState !== EventStateEnum.GRAPHIC_RESIZE ||
       graphicEditEventSubState !== GraphicEditEventSubStateEnum.RELEASED ||
       eventTargetGraphicModel === undefined
     ) {
@@ -288,7 +262,7 @@ export default class GraphicRotateEventHandler extends EventHandler {
     return true;
   }
 
-  private setUpGraphicModelRotateContext(
+  private setUpGraphicModelResizeContext(
     ctx: AppContext,
     selectionContainer: SelectionContainer,
     graphicEditInfoContainer: GraphicEditInfoContainer,
@@ -302,22 +276,49 @@ export default class GraphicRotateEventHandler extends EventHandler {
     );
     collectEditingDependentGraphicModelList(graphicEditInfoContainer);
     collectEditPreviewLayerGraphicModelList(graphicEditInfoContainer);
+    graphicEditInfoContainer.setIsBeingEditedToAllEditingDependentGraphicModels(true);
     const eventTargetGraphicModel = graphicEditInfoContainer.getEventTargetGraphicModel();
-    ctx
-      .getEditableContext()
-      .getProxyLayerInfoContainer()
-      .enableAppAreaProxyLayer(
-        eventTargetGraphicModel,
-        {
-          cursorType: 'img',
-          img: ResourceEnum.IMG_CURSOR_ROTATE,
-          position: {
-            x: 15,
-            y: 15,
-          },
-        },
-        true,
-        false
-      );
+    ctx.getEditableContext().getProxyLayerInfoContainer().enableAppAreaProxyLayer(
+      eventTargetGraphicModel,
+      {
+        cursorType: 'move',
+      },
+      true,
+      false
+    );
+  }
+
+  private calculateAppliableMouseDelta(
+    event: MouseEvent,
+    graphicEditInfoContainer: GraphicEditInfoContainer,
+    eventTargetGraphicModel: GraphicModel,
+    zoomRatio: number
+  ): IPoint {
+    const editingStartedRenderCoordinate =
+      graphicEditInfoContainer.getEditingStartedRenderCoordinate();
+
+    const currentMouseRenderCoordinate = convertClientCoordinateToRenderCoordinate(
+      { x: event.getClientX(), y: event.getClientY() },
+      zoomRatio
+    );
+
+    const editingStartedPositonBasedOnGraphicModel = applyGraphicModelTransformToRenderCoordinate(
+      graphicEditInfoContainer,
+      eventTargetGraphicModel,
+      editingStartedRenderCoordinate,
+      false
+    );
+
+    const currentMousePositonBasedOnGraphicModel = applyGraphicModelTransformToRenderCoordinate(
+      graphicEditInfoContainer,
+      eventTargetGraphicModel,
+      currentMouseRenderCoordinate,
+      false
+    );
+
+    return {
+      x: currentMousePositonBasedOnGraphicModel.x - editingStartedPositonBasedOnGraphicModel.x,
+      y: currentMousePositonBasedOnGraphicModel.y - editingStartedPositonBasedOnGraphicModel.y,
+    };
   }
 }

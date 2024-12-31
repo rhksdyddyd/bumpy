@@ -10,7 +10,7 @@ import EventHandler from '../EventHandler';
 import MouseEvent from '../../wrapper/MouseEvent';
 import KeyEvent from '../../wrapper/KeyEvent';
 
-class GraphicInsertEventHandler extends EventHandler {
+export default class GraphicInsertEventHandler extends EventHandler {
   @boundMethod
   public override onMouseDown(event: MouseEvent, ctx: AppContext): boolean {
     event.stopPropagation();
@@ -277,5 +277,3 @@ class GraphicInsertEventHandler extends EventHandler {
     return true;
   }
 }
-
-export default GraphicInsertEventHandler;

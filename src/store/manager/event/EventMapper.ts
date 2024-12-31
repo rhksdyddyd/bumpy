@@ -8,6 +8,7 @@ import GraphicEventHandler from './handler/graphic/GraphicEventHandler';
 import GraphicSelectionEventHandler from './handler/graphic/GraphicSelectionEventHandler';
 import GraphicMoveEventHandler from './handler/graphic/GraphicMoveEventHandler';
 import GraphicRotateEventHandler from './handler/graphic/GraphicRotateEventHandler';
+import GraphicResizeEventHandler from './handler/graphic/GraphicResizeEventHandler';
 
 /**
  * EventState 에 따라 어떤 event handler 들이 순서대로 동작하는 지를 관리합니다.
@@ -58,7 +59,7 @@ export default class EventMapper {
       [EventStateEnum.IDLE, [GraphicEventHandler]],
       [EventStateEnum.GRAPHIC_INSERT, [GraphicInsertEventHandler]],
       [EventStateEnum.GRAPHIC_MOVE, [GraphicSelectionEventHandler, GraphicMoveEventHandler]],
-      [EventStateEnum.GRAPHIC_RESIZE, []],
+      [EventStateEnum.GRAPHIC_RESIZE, [GraphicResizeEventHandler]],
       [EventStateEnum.GRAPHIC_ROTATE, [GraphicRotateEventHandler]],
     ]);
   }
