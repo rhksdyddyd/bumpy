@@ -5,6 +5,7 @@ import PathInfo from 'model/node/graphic/info/PathInfo';
 import { ShapeTypeEnum } from 'types/model/node/graphic/ShapeTypeEnum';
 import IdGenerator from 'util/id/IdGenerator';
 import StrokeInfo from 'model/node/graphic/info/StrokeInfo';
+import { GraphicTypeEnum } from 'types/model/node/graphic/GraphicTypeEnum';
 import { createDefaultFill, createDefaultStrokeFill } from './style/FillStyleUtil';
 
 export function createGraphicModelForInsertCommand(shapeType: ShapeTypeEnum): GraphicModel {
@@ -30,6 +31,13 @@ export function createGraphicModelForInsertCommand(shapeType: ShapeTypeEnum): Gr
   coordinateInfo.setHeight(100);
 
   graphicModel.setIsBeingEdited(true);
+
+  return graphicModel;
+}
+
+export function createGraphicModelForGroupObject(): GraphicModel {
+  const graphicModel = new GraphicModel(IdGenerator.generateId());
+  graphicModel.setGraphicType(GraphicTypeEnum.GROUP);
 
   return graphicModel;
 }

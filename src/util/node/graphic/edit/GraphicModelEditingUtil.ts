@@ -4,6 +4,7 @@ import SelectionContainer from 'store/manager/selection/SelectionContainer';
 import AppContext from 'store/context/AppContext';
 import { EventStateEnum } from 'types/store/event/EventStateEnum';
 import { CommandEnum } from 'types/store/command/CommandEnum';
+import { getChildGraphicModelList, isGroup } from '../GraphicModelTreeNodeUtil';
 
 export function getSelectedGraphicModelList(
   selectionContainer: SelectionContainer
@@ -65,7 +66,16 @@ export function collectEditPreviewLayerGraphicModelList(
   const editPreviewLayerGraphicModelList = new Array<GraphicModel>();
 
   graphicEditInfoContainer.getEditingGraphicModelList().forEach(graphicModel => {
-    editPreviewLayerGraphicModelList.push(graphicModel);
+    if (isGroup(graphicModel)) {
+      const childGraphicModelList = getChildGraphicModelList(graphicModel);
+      childGraphicModelList.forEach(childGraphicModel => {
+        if (isGroup(childGraphicModel) === false) {
+          editPreviewLayerGraphicModelList.push(childGraphicModel);
+        }
+      });
+    } else {
+      editPreviewLayerGraphicModelList.push(graphicModel);
+    }
   });
 
   // TODO

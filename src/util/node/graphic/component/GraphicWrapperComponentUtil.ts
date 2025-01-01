@@ -28,6 +28,8 @@ export function getGraphicWrapperCoordinateStyle(
 
   coordinateStyle.transform = matrixToStyleString(transformMatrix);
 
+  coordinateStyle.left = '0px';
+  coordinateStyle.top = '0px';
   coordinateStyle.width = `${size.width}px`;
   coordinateStyle.height = `${size.height}px`;
 

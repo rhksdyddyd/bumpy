@@ -2,7 +2,7 @@ import { boundMethod } from 'autobind-decorator';
 import TreeNode from 'model/node/TreeNode';
 import SimpleCommand from '../SimpleCommand';
 
-class AppendTreeNodeCommand extends SimpleCommand {
+export default class AppendTreeNodeCommand extends SimpleCommand {
   private target: TreeNode;
 
   private parent: TreeNode;
@@ -31,5 +31,3 @@ class AppendTreeNodeCommand extends SimpleCommand {
     this.apply();
   }
 }
-
-export default AppendTreeNodeCommand;

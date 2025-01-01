@@ -7,6 +7,8 @@ import { CommandCreatorMapType, CommandMapType } from 'types/store/command/Comma
 import GraphicMoveCommandHandler from '../commandhandler/graphic/GraphicMoveCommandHandler';
 import GraphicRotateCommandHandler from '../commandhandler/graphic/GraphicRotateCommandHandler';
 import GraphicResizeCommandHandler from '../commandhandler/graphic/GraphicResizeCommandHandler';
+import GraphicDeleteCommandHandler from '../commandhandler/graphic/GraphicDeleteCommandHandler';
+import GraphicGroupCommandHandler from '../commandhandler/graphic/GraphicGroupCommandHandler';
 
 /**
  * 편집 모드 (Edit) 인 경우에 대한 command mapper 입니다.
@@ -111,6 +113,24 @@ class EditModeCommandMapper extends CommandMapper {
         GraphicResizeCommandHandler
       );
       this.getCommandMap().set(CommandEnum.GRAPHIC_RESIZE_ABORT, [graphicResizeCommandHandler]);
+    });
+    this.getCommandCreatorMap().set(CommandEnum.DELETE_GRAPHIC, () => {
+      const graphicDeleteCommandHandler = commandHandlerFactory.getTargetCommandHandler(
+        GraphicDeleteCommandHandler
+      );
+      this.getCommandMap().set(CommandEnum.DELETE_GRAPHIC, [graphicDeleteCommandHandler]);
+    });
+    this.getCommandCreatorMap().set(CommandEnum.GROUP_OBJECTS, () => {
+      const graphicGroupCommandHandler = commandHandlerFactory.getTargetCommandHandler(
+        GraphicGroupCommandHandler
+      );
+      this.getCommandMap().set(CommandEnum.GROUP_OBJECTS, [graphicGroupCommandHandler]);
+    });
+    this.getCommandCreatorMap().set(CommandEnum.UNGROUP, () => {
+      const graphicGroupCommandHandler = commandHandlerFactory.getTargetCommandHandler(
+        GraphicGroupCommandHandler
+      );
+      this.getCommandMap().set(CommandEnum.UNGROUP, [graphicGroupCommandHandler]);
     });
   }
 }

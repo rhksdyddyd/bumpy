@@ -14,7 +14,7 @@ export interface IGraphicRotateCommandProps {
   commandId: CommandEnum.GRAPHIC_ROTATE | CommandEnum.GRAPHIC_ROTATE_ABORT;
 }
 
-class GraphicRotateCommandHandler extends CommandHandler {
+export default class GraphicRotateCommandHandler extends CommandHandler {
   public override processCommand(
     ctx: AppContext,
     commandProps: IGraphicRotateCommandProps
@@ -87,5 +87,3 @@ class GraphicRotateCommandHandler extends CommandHandler {
     clearGraphicEditContext(ctx);
   }
 }
-
-export default GraphicRotateCommandHandler;
