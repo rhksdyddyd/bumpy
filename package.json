@@ -58,6 +58,7 @@
   },
   "scripts": {
     "serve": "webpack serve --config ./conf/webpack.conf.js --progress --mode=development",
+    "build": "webpack --config ./conf/webpack.conf.js --progress --mode=production",
     "lint:scss:fix": "stylelint \"src/**/*.{css,scss}\" --fix"
   }
 }
