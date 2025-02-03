@@ -39,6 +39,7 @@ const GraphicWrapperComponent = (props: TreeNodeComponentProps): React.JSX.Eleme
       className={classNames(styles.container)}
       style={{
         ...coordinateStyle,
+        pointerEvents: 'none',
       }}
     >
       <GraphicComponent {...props} />
