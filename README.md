@@ -1,7 +1,8 @@
 ## 소개
 
 WYSIWYG 도형 삽입 및 편집 기능을 제공하는 프로젝트입니다.<br>
-MS PowerPoint 제품의 일부 기능을 모방한 클론입니다.
+MS PowerPoint 제품의 일부 기능을 모방한 클론입니다.<br>
+[https://rhksdyddyd.github.io](https://rhksdyddyd.github.io) 에서 테스트 할 수 있습니다.
 
 ## node version
 
