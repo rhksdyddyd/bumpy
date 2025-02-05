@@ -12,15 +12,17 @@ export default class RemoveTreeNodeCommand extends SimpleCommand {
   public constructor(target: TreeNode) {
     super();
     this.target = target;
-    this.parent = target.getParent();
-    this.nextSibling = target.getNextSibling();
+    this.parent = undefined;
+    this.nextSibling = undefined;
   }
 
   @boundMethod
   public apply(): void {
-    if (this.parent !== undefined) {
-      this.target.remove(this.parent);
+    if (this.parent === undefined) {
+      this.parent = this.target.getParent();
+      this.nextSibling = this.target.getNextSibling();
     }
+    this.removeTreeNode();
   }
 
   @boundMethod
@@ -32,6 +34,13 @@ export default class RemoveTreeNodeCommand extends SimpleCommand {
 
   @boundMethod
   public reapply(): void {
-    this.apply();
+    this.removeTreeNode();
+  }
+
+  @boundMethod
+  private removeTreeNode(): void {
+    if (this.parent !== undefined) {
+      this.target.remove(this.parent);
+    }
   }
 }
