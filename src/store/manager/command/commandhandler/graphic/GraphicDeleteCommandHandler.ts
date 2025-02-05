@@ -760,9 +760,9 @@ export default class GraphicDeleteCommandHandler extends CommandHandler {
 
   private removeChildNode(ctx: AppContext, parentNode: TreeNode): void {
     for (
-      let child = parentNode.getFirstChild();
+      let child = parentNode.getLastChild();
       child !== undefined;
-      child = child.getNextSibling()
+      child = child.getPrevSibling()
     ) {
       if (child.getFirstChild() !== undefined) {
         this.removeChildNode(ctx, child);
