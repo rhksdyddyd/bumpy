@@ -1,5 +1,5 @@
 {
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "eslint.format.enable": true,
   "stylelint.enable": true,
   "stylelint.validate": [

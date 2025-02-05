@@ -8,8 +8,8 @@ const { EsbuildPlugin } = require('esbuild-loader');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { commonPaths } = require('./common');
 
-module.exports = () => {
-  const isDevelopmentMode = true;
+module.exports = (env, argv) => {
+  const isDevelopmentMode = argv.mode === 'development';
 
   const { rootPath, srcPath, outPath } = commonPaths;
 
@@ -87,7 +87,7 @@ module.exports = () => {
   return {
     entry: path.join(srcPath, 'index.tsx'),
     target: ['web', 'es2020'],
-    devtool: isDevelopmentMode ? 'source-map' : 'source-map',
+    devtool: isDevelopmentMode ? 'source-map' : undefined,
     output: {
       path: outPath,
       filename: '[name].[contenthash].js',
@@ -121,8 +121,16 @@ module.exports = () => {
           },
         },
         // src는 CSS module 적용, 그 외는 global css로 처리.
-        { include: srcPath, test: /\.(css|scss)$/, use: [css2inline, cssModule2css, sass2css] },
-        { exclude: srcPath, test: /\.(css|scss)$/, use: [css2inline, css2css, sass2css] },
+        {
+          include: srcPath,
+          test: /\.(css|scss)$/,
+          use: [css2inline, cssModule2css, sass2css],
+        },
+        {
+          exclude: srcPath,
+          test: /\.(css|scss)$/,
+          use: [css2inline, css2css, sass2css],
+        },
         { test: /\.svg$/, use: [svg2inline] },
         { test: /\.(ttf|woff|woff2|png|gif)$/, type: 'asset/resource' },
       ],
