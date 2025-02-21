@@ -14,6 +14,10 @@ npm version: 8.19.4
 npm install<br>
 npm run serve
 
+## 주요 패키지
+
+React, Webpack
+
 ## 세부 기능
 
 좌측 상단의 버튼을 클릭하여 도형 삽입 상태로 진입할 수 있습니다.<br>
